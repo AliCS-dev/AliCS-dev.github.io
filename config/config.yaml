@@ -1,159 +1,110 @@
-## ===========================================================================
-##  SITE CONFIGURATION
-##  This is the ONLY file you need to edit to change the content.
-##  Text formatting (bio, descriptions, news):
-##    **bold**   *italic*   ~~strikethrough~~   [link text](https://example.com)
-##  Keep a space after each colon and preserve the indentation (2 spaces).
-## ===========================================================================
-
 site:
-  title: "Francesco Congiu"          # Browser tab title and search-result title
-  description: "Francesco Congiu — PhD Student at the University of Cagliari (TAIL), researching confidentiality-preserving and explainable Retrieval-Augmented Generation."   # meta description for search engines / social cards
-  favicon: "assets/images/favicon.png"   # small icon shown in the browser tab
-  # url: "https://francescocongiu.com"   # optional: your live URL (enables canonical + social-card image)
-  accent: "#4f46e5"             # Accent color (any hex code)
-  default_theme: "auto"         # light | dark | auto (follows the system)
-  # News badges are colored by year (a cycle of 5 colors).
-  # Order maps to year ending in …0/5, …1/6, …2/7, …3/8, …4/9.
-  # Leave as-is for the defaults, or customize here:
+  title: "Muhammad Ali Khan"
+  description: "Muhammad Ali Khan — Computer Science undergraduate at the University of Pécs, interested in Artificial Intelligence, Retrieval-Augmented Generation, Computer Vision and Cloud Computing."
+  favicon: "assets/images/favicon.png"
+  accent: "#4f46e5"
+  default_theme: "auto"
   news_palette: ["#8ac926", "#3b9ae1", "#9b72aa", "#fb6962", "#f6c026"]
 
-## --------------------------------------------------------------------- HOME
-## The Home page shows three blocks, in this order:
-##   1) Who Am I / Research  -> profile.bio
-##   2) Supervisor           -> profile.supervisor
-##   3) Contact              -> profile.contact (falls back to the email)
 profile:
-  name: "Francesco Congiu"
-  role: "PhD Student · University of Cagliari"   # <-- edit with your exact title
-  photo: "assets/images/profile.jpg"      # replace with your photo
-  email: "francesco.congiu@acm.org"   # plain address; the mailto: link is built automatically
+  name: "Muhammad Ali Khan"
+  role: "BSc Computer Science · University of Pécs"
+  photo: "assets/images/profile.jpg"
+  email: "muhammadalikhanhitec@gmail.com"
 
-  # Badges shown under your name (research areas)
   research:
-  - "RAG Systems"
-  - "Neural Information Retrieval"
-  - "Privacy-Preserving NLP"
-  - "Knowledge Reconciliation"
-  - "AI in Education"
+  - "Artificial Intelligence"
+  - "Retrieval-Augmented Generation"
+  - "Computer Vision"
+  - "Cloud Computing"
+  - "MLOps"
 
-  # 1) Who Am I / Research
   bio: |
-    I am a PhD Student in the [University of Cagliari](https://www.unica.it/it) at the TAIL 
-    (Trustworthy Artificial Intelligence Laboratory). My research interest include **Retrieval-Augmented Generation Systems** 
-    and **Confidential AI**, applied to Educational and Professional contexts. 
-    Previously, I completed my MS in Applied Artificial Intelligence (summa cum laude) and my BS in Computer Science at [University of Cagliari](https://www.unica.it/it).
+    I am a Computer Science undergraduate at the [University of Pécs](https://international.pte.hu/) with interests in **Artificial Intelligence**, **Retrieval-Augmented Generation (RAG)**, **Computer Vision**, and **Cloud Computing**.
 
-  # 2) Supervisor
+    I am currently working on RAG systems during a research internship at the [University of Cagliari](https://www.unica.it/it) and developing my BSc thesis project on **traffic and crowd monitoring using AI-based object detection**.
+
   supervisor: |
-    My PhD research is supervised by Prof. [Ludovico Boratto](https://www.ludovicoboratto.com)
-    and Prof. [Mirko Marras](https://www.mirkomarras.com) at
-    the Department of Mathematics and Computer Science, University of Cagliari.
+    My current research internship is hosted at the University of Cagliari, where I am working with RAG systems, FlashRAG, retrieval pipelines, Docker-based AI services, and experimental evaluation workflows.
 
-  # 3) Contact (optional: if omitted, the email above is used automatically)
   contact: |
-    Feel free to reach out by email at
-    [francesco.congiu@acm.org](mailto:francesco.congiu@acm.org), or connect through any
-    of the links next to my photo.
+    Feel free to reach out by email at [muhammadalikhanhitec@gmail.com](mailto:muhammadalikhanhitec@gmail.com), or connect through GitHub and LinkedIn.
 
-  # Icons under the photo. The email icon is added automatically from "email".
-  # Available types: scholar, orcid, github, gitlab, linkedin, twitter/x,
-  #   bluesky, mastodon, researchgate, arxiv, semantic-scholar, dblp, inspire,
-  #   youtube, website
   links:
-    - type: scholar
-      url: "https://scholar.google.com/citations?user=3vvc7RAAAAAJ"
-    - type: orcid
-      url: "https://orcid.org/0009-0000-7821-0663"
     - type: github
-      url: "https://github.com/wakaflocka17"
+      url: "https://github.com/AliCS-dev"
     - type: linkedin
-      url: "https://www.linkedin.com/in/f-congiu-res"
+      url: "https://www.linkedin.com/in/muhammed-ali-khan-97708b299"
 
-## --------------------------------------------------------------------- NEWS
-## Each news item has a date "MM/YYYY" and some text. The badge color depends
-## on the year (see news_palette above). Items are sorted automatically, from
-## newest to oldest. You can use **bold**, *italic*, ~~strikethrough~~ and
-## [links](https://...).
 news:
-  - date: "03/2026"
-    text: "Started as a Teaching Assistant for the [Algorithms and Data Structures](https://unica.coursecatalogue.cineca.it/corsi/2025/11185/insegnamenti/2025/21306/2025/9999?annoOrdinamento=2025&coorte=2025) course."
+  - date: "06/2026"
+    text: "Started a research internship at the [University of Cagliari](https://www.unica.it/it), working on Retrieval-Augmented Generation systems."
 
-  - date: "12/2025"
-    text: "Our paper *Confidential Retrieval-Augmented Generation in Educational Contexts* was presented at [WAILS25](https://wailsworkshop.github.io/2025/)."
+  - date: "06/2026"
+    text: "Developed Mosaic-RAG, a microservice-based RAG architecture using FastAPI and Docker."
 
-  - date: "11/2025"
-    text: "Our paper *Confidentiality-Preserving Retrieval-Augmented Generation over Educational Resources* was presented at [SIREM '25](https://sirem.org/convegno-2025/)."
+  - date: "07/2025"
+    text: "Completed the Introduction to Artificial Intelligence and Machine Learning Summer School at [Aalto University](https://www.aalto.fi/en/aalto-university-summer-school/introduction-to-ai-and-machine-learning)."
 
-  - date: "11/2025"
-    text: "Started my PhD at [University of Cagliari](https://www.unica.it/) within TAIL!"
+  - date: "09/2023"
+    text: "Started BSc Computer Science at the [University of Pécs](https://international.pte.hu/)."
 
-## ------------------------------------------------------------- PUBLICATIONS
-## A list of your publications (Google Scholar has no reliable API for a static
-## site). Wrap your own name in **...** in the authors to highlight it. In
-## "links" add only what you have, e.g. [PDF] and [Code].
-publications:
-  - title: "Confidentiality-Preserving Retrieval-Augmented Generation over Educational Resources"
-    authors: "Boratto L., **Congiu F.**, Fenu G., Marras M."
-    venue: "SIREM"
-    year: 2025
-    # url: "https://example.com/paper"      # optional: makes the title a link
-    links:
-      - label: "PDF"
-        url: "https://inclusiveteaching.it/index.php/inclusiveteaching/article/download/447/421"
-      # - label: "Code"
-      #  url: "https://github.com/mariorossi/paper"
+publications: []
 
-  - title: "Confidential Retrieval-Augmented Generation in Educational Contexts"
-    authors: "Boratto L., **Congiu F.**, Fenu G., Medda G., Pau M."
-    venue: "WAILS"
-    year: 2025
-    links:
-      - label: "PDF"
-        url: "https://link.springer.com/chapter/10.1007/978-3-032-17604-2_8"
-
-## ----------------------------------------------------------------------- CV
 cv:
-  file: "assets/pdf/congiu_francesco_resume.pdf"     # path to your CV
+  file: "assets/pdf/Muhammad_Ali_Khan_CV.pdf"
   description: "Last updated: June 2026."
-  embed: true                   # true shows the PDF preview inside the page
+  embed: true
 
-## ------------------------------------------------------------------ TEACHING
-teaching:
-  - course: "Algorithms and Data Structures"
-    role: "Teaching Assistant"
-    institution: "University of Cagliari"
-    term: "Academic Year 2024/2025"
-    logo: "assets/images/unica.png"     # round logo shown next to the course
-    url: "https://unica.coursecatalogue.cineca.it/corsi/2025/11185/insegnamenti/2025/21306/2025/9999?annoOrdinamento=2025&coorte=2025"     # optional
-    description: |
-      Hands-on laboratory tutoring focused on the implementation and analysis of foundational 
-      data structures and algorithms. The sessions involved guiding students through practical coding exercises, 
-      debugging, and problem-solving using Python through Jupyter.
+teaching: []
 
-## --------------------------------------------------------- CUSTOM SECTIONS
-## Free-form sections shown after Teaching. Each has a "label" and a "body".
-## In the body: blank line = new paragraph, a line starting with "- " = bullet,
-## plus **bold**, *italic*, ~~strike~~ and [links](https://...).
 sections:
-  - label: "Prospective Students"
-    drawer: true                 # show via a side tab that slides open a panel
-    tab_label: "Prospective Students"
-    status: "FILLED"             # OPEN -> green badge/tab, FILLED -> amber
+  - label: "Education"
     body: |
-      I supervise **one BSc/MSc thesis student at a time**, and that position is currently filled. Owing to my accademic commitments, I am **not accepting new thesis proposals at this time**, and cannot reply to application emails until the next cycle.
+      **University of Pécs**  
+      BSc Computer Science  
+      Sep. 2023 -- Present
 
-      **Next evaluation window: Autumn 2026**.
+      **Aalto University Summer School**  
+      Introduction to Artificial Intelligence and Machine Learning  
+      July 2025 -- Aug. 2025
 
-      My research focuses primarily on **RAG systems** and their various aspects. If you are planning to apply for a future recruitment round, the most suitable candidates generally possess:
+      **Saxion University of Applied Sciences**  
+      BSc Applied Computer Science and Electronics  
+      Sep. 2022 -- Aug. 2023
 
-      - A solid foundation in **Deep Learning** (architectures, training, evaluation).
-      - Practical proficiency in **Python** and **PyTorch**.
-      - Some familiarity with **RAG pipelines** and/or **RL fundamentals** (e.g., policy-gradient methods).
+  - label: "Projects"
+    body: |
+      **Traffic and Crowd Monitoring System**  
+      BSc thesis project for real-time traffic and crowd monitoring using Python, OpenCV, YOLOv8 and PostgreSQL.  
+      [GitHub](https://github.com/AliCS-dev/traffic-crowd-monitoring-app)
 
-      In the meantime, consolidate these foundations, follow recent literature in both areas, and complete a small self-contained project you can later point to. **Please do not send an application email while this section reads FILLED** - messages received in this period cannot be considered. I will update this page as soon as the position reopens.
-      
-## ------------------------------------------------------------------- FOOTER
+      **Mosaic-RAG**  
+      Modular Retrieval-Augmented Generation architecture using Python, FastAPI and Docker.  
+      [GitHub](https://github.com/AliCS-dev/Mosaic-RAG)
+
+      **Object Detection using YOLOv8**  
+      Computer vision project developed during the Aalto University Summer School using real-world image analysis workflows.  
+      [GitHub](https://github.com/AliCS-dev/Object-Detection-using-YOLOv8)
+
+      **FlashRAG Research Work**  
+      Research internship work involving FlashRAG, retrieval pipelines, benchmark datasets and RAG evaluation.  
+      [GitHub](https://github.com/AliCS-dev/FlashRAG)
+
+  - label: "Technical Skills"
+    body: |
+      **Languages:** Python, C++, Java, SQL, JavaScript, TypeScript
+
+      **AI & Machine Learning:** PyTorch, YOLOv8, OpenCV, ONNX Runtime, Retrieval-Augmented Generation
+
+      **Backend Development:** FastAPI, Flask, REST APIs
+
+      **Databases:** PostgreSQL, MySQL
+
+      **DevOps & Tools:** Git, Docker, Linux, GitHub Actions, WSL2
+
+      **Cloud:** AWS Solutions Architect Associate -- In Progress
+
 footer: |
-  © 2026 Francesco Congiu
-  Built with a minimal template.
+  © 2026 Muhammad Ali Khan
+  Built with a minimal academic website template.
