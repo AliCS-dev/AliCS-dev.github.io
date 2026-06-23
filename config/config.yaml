@@ -1,6 +1,7 @@
 site:
   title: "Muhammad Ali Khan"
   description: "Muhammad Ali Khan — Computer Science undergraduate at the University of Pécs, interested in Artificial Intelligence, Retrieval-Augmented Generation, Computer Vision and Cloud Computing."
+  url: "https://alics-dev.github.io"
   favicon: "assets/images/favicon.png"
   accent: "#4f46e5"
   default_theme: "auto"
@@ -8,7 +9,7 @@ site:
 
 profile:
   name: "Muhammad Ali Khan"
-  role: "BSc Computer Science · University of Pécs"
+  role: "Computer Science Student · University of Pécs"
   photo: "assets/images/profile.jpeg"
   email: "muhammadalikhanhitec@gmail.com"
 
@@ -103,8 +104,8 @@ sections:
 
       **DevOps & Tools:** Git, Docker, Linux, GitHub Actions, WSL2
 
-      **Cloud:** AWS Solutions Architect Associate -- In Progress
+      **Cloud:** AWS Solutions Architect Associate (Certification in Progress)
 
 footer: |
-  © 2026 Muhammad Ali Khan | Computer Science Portofolio
+  © 2026 Muhammad Ali Khan 
  
