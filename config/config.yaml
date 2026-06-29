@@ -21,9 +21,11 @@ profile:
     - "Machine Learning"
 
   bio: |
-    I am a Computer Science undergraduate at the [University of Pécs](https://international.pte.hu/) with interests in **Artificial Intelligence**, **Retrieval-Augmented Generation (RAG)**, **Computer Vision**, and **Cloud Computing**.
+    I am a Computer Science undergraduate at the [University of Pécs](https://international.pte.hu/) with interests in **Artificial Intelligence**, **Computer Vision**, **Systems Programming**, and **Cloud Computing**.
 
-    I am currently working on RAG systems during a research internship at the [University of Cagliari](https://www.unica.it/it) and developing my BSc thesis project on **traffic and crowd monitoring using AI-based object detection**.
+    I am currently a Research Intern at the [University of Cagliari](https://www.unica.it/it), where I work on **Retrieval-Augmented Generation (RAG)** systems, distributed AI services, and experimental evaluation workflows.
+
+    Outside my research, I enjoy building software in **C++**, exploring **operating systems**, and developing efficient, scalable software systems.
 
   supervisor: |
     My current research internship is hosted at the University of Cagliari, where I am working with RAG systems, FlashRAG, retrieval pipelines, Docker-based AI services, and experimental evaluation workflows.
