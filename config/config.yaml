@@ -13,7 +13,7 @@ profile:
   photo: "assets/images/profile.jpeg"
   email: "muhammadalikhanhitec@gmail.com"
 
-   research:
+  research:
     - "Artificial Intelligence"
     - "Computer Vision"
     - "Systems Programming"
