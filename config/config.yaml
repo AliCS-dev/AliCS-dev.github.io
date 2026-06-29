@@ -96,15 +96,15 @@ sections:
 
   - label: "Technical Skills"
     body: |
-      **Languages:** Python, C++, Java, SQL, JavaScript, TypeScript
+      **Languages:** C++/C, Python, Java, SQL, JavaScript, TypeScript
 
-      **AI & Machine Learning:** PyTorch, YOLOv8, OpenCV, ONNX Runtime, Retrieval-Augmented Generation
+      **AI & Machine Learning:** ONNX, YOLOv8, OpenCV, PyTorch, Retrieval-Augmented Generation
 
       **Backend Development:** FastAPI, Flask, REST APIs
 
       **Databases:** PostgreSQL, MySQL
 
-      **DevOps & Tools:** Git, Docker, Linux, GitHub Actions, WSL2
+      **DevOps & Tools:** Linux, Docker, Git, GitHub Actions, WSL2
 
       **Cloud:** AWS Solutions Architect Associate (Certification in Progress)
 
