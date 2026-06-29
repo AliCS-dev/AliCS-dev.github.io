@@ -14,11 +14,11 @@ profile:
   email: "muhammadalikhanhitec@gmail.com"
 
    research:
-  - "Artificial Intelligence"
-  - "Computer Vision"
-  - "Systems Programming"
-  - "Cloud Computing"
-  - "Machine Learning"
+     - "Artificial Intelligence"
+     - "Computer Vision"
+     - "Systems Programming"
+     - "Cloud Computing"
+     - "Machine Learning"
 
   bio: |
     I am a Computer Science undergraduate at the [University of Pécs](https://international.pte.hu/) with interests in **Artificial Intelligence**, **Retrieval-Augmented Generation (RAG)**, **Computer Vision**, and **Cloud Computing**.
