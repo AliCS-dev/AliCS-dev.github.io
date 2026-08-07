@@ -196,16 +196,6 @@
     const grid = el("div", "project-grid");
     projects.forEach((project) => {
       const card = el("article", `project-card${project.featured ? " project-card-featured" : ""}`);
-      if (project.image) {
-        const figure = el("figure", "project-media");
-        const img = el("img");
-        img.src = project.image;
-        img.alt = project.image_label ? `${project.title}: ${project.image_label}` : `${project.title} project visual`;
-        img.loading = "lazy";
-        figure.appendChild(img);
-        if (project.image_label) { const cap = el("figcaption"); cap.textContent = project.image_label; figure.appendChild(cap); }
-        card.appendChild(figure);
-      }
       const body = el("div", "project-body");
       const title = el("h3", "project-title"); title.textContent = project.title || "Project"; body.appendChild(title);
       if (project.description) { const d = el("p", "project-description"); d.textContent = project.description; body.appendChild(d); }
@@ -246,6 +236,44 @@
       const meta = [entry.organisation, entry.institution, entry.term].filter(Boolean).join(" · ");
       if (meta) { const m = el("p", "experience-meta"); m.textContent = meta; item.appendChild(m); }
       if (entry.description) { const d = el("p", "experience-description"); d.textContent = entry.description; item.appendChild(d); }
+      list.appendChild(item);
+    });
+    sec.appendChild(list);
+  }
+
+  function renderOrganisation(cfg) {
+    const sec = $("organisation");
+    const org = cfg.organisation || {};
+    if (!org.name) { sec.remove(); return; }
+    sec.appendChild(sectionLabel(cfg, "organisation", "Organisation"));
+    const card = el("article", "organisation-card");
+    if (org.image) {
+      const image = el("img", "organisation-logo");
+      image.src = org.image;
+      image.alt = `${org.name} logo`;
+      card.appendChild(image);
+    }
+    const body = el("div", "organisation-body");
+    const title = el("h3", "organisation-name");
+    if (org.url) title.appendChild(externalLink(org.url, org.name, "organisation-link"));
+    else title.textContent = org.name;
+    body.appendChild(title);
+    if (org.description) { const description = el("p", "organisation-description"); description.textContent = org.description; body.appendChild(description); }
+    card.appendChild(body);
+    sec.appendChild(card);
+  }
+
+  function renderEducation(cfg) {
+    const sec = $("education");
+    const entries = Array.isArray(cfg.education) ? cfg.education : [];
+    if (!entries.length) { sec.remove(); return; }
+    sec.appendChild(sectionLabel(cfg, "education", "Education"));
+    const list = el("div", "education-list");
+    entries.forEach((entry) => {
+      const item = el("article", "education-item");
+      const institution = el("h3", "education-institution"); institution.textContent = entry.institution || "Education"; item.appendChild(institution);
+      if (entry.programme) { const programme = el("p", "education-programme"); programme.textContent = entry.programme; item.appendChild(programme); }
+      if (entry.term) { const term = el("p", "education-term"); term.textContent = entry.term; item.appendChild(term); }
       list.appendChild(item);
     });
     sec.appendChild(list);
@@ -576,9 +604,11 @@
 
     renderHeader(cfg);
     renderAbout(cfg);
+    renderExperience(cfg);
+    renderOrganisation(cfg);
+    renderEducation(cfg);
     renderProjects(cfg);
     renderNow(cfg);
-    renderExperience(cfg);
     renderPublications(cfg);
     renderTeaching(cfg);
     renderSections(cfg);
