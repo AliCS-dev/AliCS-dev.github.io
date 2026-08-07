@@ -66,10 +66,10 @@ organisation:
 education:
   - institution: "University of Pécs"
     programme: "BSc Computer Science"
-    term: "Sep. 2023 to Present"
+    term: "Sep. 2024 - Present"
   - institution: "Aalto University Summer School"
     programme: "Introduction to Artificial Intelligence and Machine Learning"
-    term: "July 2025 to Aug. 2025"
+    term: "July 2025 - Aug. 2025"
 
 cv:
   file: "assets/pdf/Khan_Ali_CV.pdf"
@@ -77,7 +77,7 @@ cv:
   embed: true
 
 sections:
-  - label: "Engineering Areas"
+  - label: "Technical Skills"
     type: "areas"
     areas:
       - title: "Systems"
@@ -85,7 +85,9 @@ sections:
       - title: "Cloud"
         items: ["AWS", "Docker", "Distributed Systems"]
       - title: "Simulation"
-        items: ["MATLAB", "Simulink", "UAV Modelling"]
+        items: ["MATLAB", "Simulink", "UAV Modelling", "OpenRocket Simulator"]
+      - title: "Hardware and Design"
+        items: ["Autodesk Fusion", "Altium Designer", "Quartus Prime", "Tinkercad"]
       - title: "Applied AI"
         items: ["Computer Vision", "RAG", "ONNX and Deployment"]
 footer: |

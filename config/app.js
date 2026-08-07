@@ -604,9 +604,9 @@
 
     renderHeader(cfg);
     renderAbout(cfg);
+    renderEducation(cfg);
     renderExperience(cfg);
     renderOrganisation(cfg);
-    renderEducation(cfg);
     renderProjects(cfg);
     renderNow(cfg);
     renderPublications(cfg);
