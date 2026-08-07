@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" role="img" aria-labelledby="title desc">
+  <title id="title">Mosaic RAG architecture</title>
+  <desc id="desc">A service architecture visual showing retrieval, generation and evaluation services.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#101827"/><stop offset="1" stop-color="#1f2452"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="9" stdDeviation="12" flood-opacity=".28"/></filter>
+  </defs>
+  <rect width="900" height="500" fill="url(#bg)"/>
+  <text x="58" y="74" fill="#eef2ff" font-family="Inter,Arial,sans-serif" font-size="30" font-weight="700">Mosaic RAG</text>
+  <text x="58" y="106" fill="#a5b4fc" font-family="ui-monospace,monospace" font-size="17">modular retrieval augmented generation</text>
+  <g fill="none" stroke="#818cf8" stroke-width="4" stroke-linecap="round" opacity=".9">
+    <path d="M265 278H350"/><path d="M535 278H620"/>
+  </g>
+  <g fill="#818cf8"><path d="M350 268l20 10-20 10z"/><path d="M620 268l20 10-20 10z"/></g>
+  <g filter="url(#shadow)">
+    <rect x="58" y="194" width="207" height="168" rx="18" fill="#18243a" stroke="#334155"/>
+    <rect x="350" y="194" width="185" height="168" rx="18" fill="#27245b" stroke="#818cf8"/>
+    <rect x="620" y="194" width="222" height="168" rx="18" fill="#18243a" stroke="#334155"/>
+  </g>
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="82" y="245" fill="#e0e7ff" font-size="23" font-weight="700">Retrieval</text>
+    <text x="82" y="278" fill="#94a3b8" font-size="16">Search and context</text>
+    <text x="82" y="303" fill="#94a3b8" font-size="16">service</text>
+    <text x="375" y="245" fill="#e0e7ff" font-size="23" font-weight="700">Generation</text>
+    <text x="375" y="278" fill="#c7d2fe" font-size="16">FastAPI service</text>
+    <text x="375" y="303" fill="#c7d2fe" font-size="16">with Docker</text>
+    <text x="645" y="245" fill="#e0e7ff" font-size="23" font-weight="700">Evaluation</text>
+    <text x="645" y="278" fill="#94a3b8" font-size="16">Retrieval and answer</text>
+    <text x="645" y="303" fill="#94a3b8" font-size="16">quality checks</text>
+  </g>
+  <text x="58" y="443" fill="#94a3b8" font-family="ui-monospace,monospace" font-size="16">Python  •  FastAPI  •  Docker  •  RAG</text>
+</svg>

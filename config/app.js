@@ -143,7 +143,7 @@
         const label = l.label || LINK_LABELS[l.type] || (l.type ? cap(l.type) : "Link");
         a.setAttribute("aria-label", label);
         a.title = label;
-        a.innerHTML = svgIcon(l.type);
+        a.innerHTML = `${svgIcon(l.type)}<span>${esc(label)}</span>`;
         if (l.type !== "email") { a.target = "_blank"; a.rel = "noopener"; }
         box.appendChild(a);
       });
@@ -167,10 +167,7 @@
     const blocks = [];
     if (p.bio) blocks.push(p.bio);
     if (p.supervisor) blocks.push(p.supervisor);
-    let contact = p.contact;
-    const mail = bareEmail(p.email);
-    if (!contact && mail) contact = `Feel free to reach out by email at [${mail}](mailto:${mail}).`;
-    if (contact) blocks.push(contact);
+    if (p.contact) blocks.push(p.contact);
 
     if (!blocks.length) { box.remove(); return; }
     blocks.forEach((text) => {
@@ -180,6 +177,78 @@
         box.appendChild(pEl);
       });
     });
+  }
+
+  function externalLink(url, label, className) {
+    const a = el("a", className || "project-link");
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.textContent = label;
+    return a;
+  }
+
+  function renderProjects(cfg) {
+    const sec = $("projects");
+    const projects = Array.isArray(cfg.projects) ? cfg.projects : [];
+    if (!projects.length) { sec.remove(); return; }
+    sec.appendChild(sectionLabel(cfg, "projects", "Projects"));
+    const grid = el("div", "project-grid");
+    projects.forEach((project) => {
+      const card = el("article", `project-card${project.featured ? " project-card-featured" : ""}`);
+      if (project.image) {
+        const figure = el("figure", "project-media");
+        const img = el("img");
+        img.src = project.image;
+        img.alt = project.image_label ? `${project.title}: ${project.image_label}` : `${project.title} project visual`;
+        img.loading = "lazy";
+        figure.appendChild(img);
+        if (project.image_label) { const cap = el("figcaption"); cap.textContent = project.image_label; figure.appendChild(cap); }
+        card.appendChild(figure);
+      }
+      const body = el("div", "project-body");
+      const title = el("h3", "project-title"); title.textContent = project.title || "Project"; body.appendChild(title);
+      if (project.description) { const d = el("p", "project-description"); d.textContent = project.description; body.appendChild(d); }
+      if (Array.isArray(project.technologies) && project.technologies.length) {
+        const tech = el("div", "project-technologies");
+        project.technologies.forEach((item) => { const tag = el("span"); tag.textContent = item; tech.appendChild(tag); });
+        body.appendChild(tech);
+      }
+      const links = el("div", "project-links");
+      if (project.github) links.appendChild(externalLink(project.github, "GitHub"));
+      if (project.details) links.appendChild(externalLink(project.details, "Details", "project-link project-link-secondary"));
+      if (links.childElementCount) body.appendChild(links);
+      card.appendChild(body);
+      grid.appendChild(card);
+    });
+    sec.appendChild(grid);
+  }
+
+  function renderNow(cfg) {
+    const sec = $("now");
+    const items = Array.isArray(cfg.now) ? cfg.now : [];
+    if (!items.length) { sec.remove(); return; }
+    sec.appendChild(sectionLabel(cfg, "now", "Currently"));
+    const list = el("ul", "now-list");
+    items.forEach((item) => { const li = el("li"); li.textContent = item; list.appendChild(li); });
+    sec.appendChild(list);
+  }
+
+  function renderExperience(cfg) {
+    const sec = $("experience");
+    const entries = Array.isArray(cfg.experience) ? cfg.experience : [];
+    if (!entries.length) { sec.remove(); return; }
+    sec.appendChild(sectionLabel(cfg, "experience", "Experience"));
+    const list = el("div", "experience-list");
+    entries.forEach((entry) => {
+      const item = el("article", "experience-item");
+      const heading = el("h3", "experience-role"); heading.textContent = entry.role || "Experience"; item.appendChild(heading);
+      const meta = [entry.organisation, entry.institution, entry.term].filter(Boolean).join(" · ");
+      if (meta) { const m = el("p", "experience-meta"); m.textContent = meta; item.appendChild(m); }
+      if (entry.description) { const d = el("p", "experience-description"); d.textContent = entry.description; item.appendChild(d); }
+      list.appendChild(item);
+    });
+    sec.appendChild(list);
   }
 
   function renderNews(cfg) {
@@ -363,6 +432,20 @@
     const frag = document.createDocumentFragment();
     if (s.label) { const lab = el("div", "section-label"); lab.textContent = s.label; frag.appendChild(lab); }
     if (s.status) frag.appendChild(statusBadge(s.status));
+    if (s.type === "areas" && Array.isArray(s.areas)) {
+      const grid = el("div", "areas-grid");
+      s.areas.forEach((area) => {
+        const item = el("div", "area");
+        const title = el("h3", "area-title"); title.textContent = area.title || "Area"; item.appendChild(title);
+        if (Array.isArray(area.items) && area.items.length) {
+          const list = el("ul", "area-list");
+          area.items.forEach((value) => { const li = el("li"); li.textContent = value; list.appendChild(li); });
+          item.appendChild(list);
+        }
+        grid.appendChild(item);
+      });
+      frag.appendChild(grid);
+    }
     if (s.body) { const body = el("div", "section-body"); renderBody(body, s.body); frag.appendChild(body); }
     return frag;
   }
@@ -493,7 +576,9 @@
 
     renderHeader(cfg);
     renderAbout(cfg);
-    renderNews(cfg);
+    renderProjects(cfg);
+    renderNow(cfg);
+    renderExperience(cfg);
     renderPublications(cfg);
     renderTeaching(cfg);
     renderSections(cfg);

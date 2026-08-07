@@ -1,113 +1,94 @@
 site:
   title: "Muhammad Ali Khan"
-  description: "Muhammad Ali Khan — Computer Science undergraduate at the University of Pécs, interested in Artificial Intelligence, Retrieval-Augmented Generation, Computer Vision and Cloud Computing."
+  description: "Muhammad Ali Khan builds systems across C++ and Linux, cloud infrastructure, engineering simulation and applied AI."
   url: "https://alics-dev.github.io"
   favicon: "assets/images/favicon.png"
   accent: "#4f46e5"
   default_theme: "auto"
-  news_palette: ["#8ac926", "#3b9ae1", "#9b72aa", "#fb6962", "#f6c026"]
 
 profile:
   name: "Muhammad Ali Khan"
-  role: "Computer Science Undergraduate · University of Pécs"
+  role: "Computer Science student building systems across **C++ and Linux**, cloud infrastructure, engineering simulation and applied AI."
   photo: "assets/images/profile.jpeg"
   email: "muhammadalikhanhitec@gmail.com"
-
   research:
-    - "Artificial Intelligence"
-    - "Computer Vision"
-    - "Systems Programming"
-    - "Cloud Computing"
-    - "Machine Learning"
-
+    - "Systems"
+    - "Cloud"
+    - "Simulation"
+    - "AI Infrastructure"
   bio: |
-    I am a Computer Science undergraduate at the [University of Pécs](https://international.pte.hu/) with interests in **Artificial Intelligence**, **Computer Vision**, **Systems Programming**, and **Cloud Computing**.
+    I enjoy building systems where software has to interact with real constraints: compute, networks, sensors, hardware and physical environments.
 
-    I am currently a Research Intern at the [University of Cagliari](https://www.unica.it/it), where I work on **Retrieval-Augmented Generation (RAG)** systems, distributed AI services, and experimental evaluation workflows.
-
-    
-
-  supervisor: |
-     I enjoy building projects that combine software engineering, artificial intelligence, and systems programming. My goal is to develop efficient, reliable software while continuously exploring low-level computing, distributed systems, and modern AI technologies.
-
-  contact: |
-    Feel free to reach out by email at [muhammadalikhanhitec@gmail.com](mailto:muhammadalikhanhitec@gmail.com), or connect through GitHub and LinkedIn.
-
+    My current work focuses on C++ and Linux systems, AWS and distributed systems, MATLAB and Simulink engineering simulation, and applied AI.
   links:
     - type: github
       url: "https://github.com/AliCS-dev"
     - type: linkedin
       url: "https://www.linkedin.com/in/muhammed-ali-khan-97708b299"
 
-news:
-  - date: "06/2026"
-    text: "Started a research internship at the [University of Cagliari](https://www.unica.it/it), working on Retrieval-Augmented Generation systems."
+projects:
+  - title: "Urban UAV Logistics Simulation"
+    featured: true
+    image: "assets/images/projects/budapest-urban-scenario.png"
+    image_label: "Budapest simulation render"
+    description: "An urban drone logistics simulation built from real terrain and OpenStreetMap building data. I am developing the simulation for route planning, sensor modelling and safe UAV flights in Budapest and Pécs."
+    technologies: ["MATLAB", "Simulink", "UAV Toolbox", "GNSS", "LiDAR"]
+    github: "https://github.com/AppliedSystems-Lab/Multi-UAV-Path-Planning"
+    details: "https://github.com/AppliedSystems-Lab/Multi-UAV-Path-Planning#readme"
+  - title: "Mosaic-RAG"
+    image: "assets/images/projects/mosaic-rag-architecture.svg"
+    image_label: "Architecture visual"
+    description: "A modular Retrieval Augmented Generation system organised as separate retrieval, generation and evaluation services. It is designed to make experiments and deployment easier to reason about."
+    technologies: ["Python", "FastAPI", "Docker", "RAG"]
+    github: "https://github.com/AliCS-dev/Mosaic-RAG"
+    details: "https://github.com/AliCS-dev/Mosaic-RAG#readme"
+  - title: "Traffic and Crowd Monitoring System"
+    image: "assets/images/projects/traffic-monitoring-pipeline.svg"
+    image_label: "Processing pipeline visual"
+    description: "A BSc thesis project for real time traffic and crowd monitoring. It brings together video analysis, object detection and data storage in one engineering system."
+    technologies: ["YOLOv8", "OpenCV", "PostgreSQL", "Python"]
+    github: "https://github.com/AliCS-dev/traffic-crowd-monitoring-app"
+    details: "https://github.com/AliCS-dev/traffic-crowd-monitoring-app#readme"
 
-  - date: "06/2026"
-    text: "Developed Mosaic-RAG, a microservice-based RAG architecture using FastAPI and Docker."
+now:
+  - "Building an urban UAV logistics simulation in MATLAB and Simulink"
+  - "Preparing for AWS Solutions Architect Associate"
+  - "Continuing Mosaic RAG research"
+  - "Developing C++ and Linux systems skills"
 
-  - date: "07/2025"
-    text: "Completed the Introduction to Artificial Intelligence and Machine Learning Summer School at [Aalto University](https://www.aalto.fi/en/aalto-university-summer-school/introduction-to-ai-and-machine-learning)."
-
-  - date: "09/2023"
-    text: "Started BSc Computer Science at the [University of Pécs](https://international.pte.hu/)."
-
-publications: []
+experience:
+  - role: "Research Intern"
+    organisation: "Trustworthy Artificial Intelligence Laboratory"
+    institution: "University of Cagliari"
+    term: "May to July 2026"
+    description: "Worked on RAG systems, retrieval evaluation, FlashRAG and the Mosaic RAG microservice architecture using FastAPI and Docker."
 
 cv:
   file: "assets/pdf/Khan_Ali_CV.pdf"
   description: "Last updated: June 2026."
   embed: true
 
-teaching: []
-
 sections:
+  - label: "Engineering Areas"
+    type: "areas"
+    areas:
+      - title: "Systems"
+        items: ["C and C++", "Linux", "Raspberry Pi", "Networking"]
+      - title: "Cloud"
+        items: ["AWS", "Docker", "Distributed Systems"]
+      - title: "Simulation"
+        items: ["MATLAB", "Simulink", "UAV Modelling"]
+      - title: "Applied AI"
+        items: ["Computer Vision", "RAG", "ONNX and Deployment"]
   - label: "Education"
     body: |
-      **University of Pécs**  
-      BSc Computer Science  
-      Sep. 2023 -- Present
+      **University of Pécs**
+      BSc Computer Science
+      Sep. 2023 to Present
 
-      **Aalto University Summer School**  
-      Introduction to Artificial Intelligence and Machine Learning  
-      July 2025 -- Aug. 2025
-
-      **Saxion University of Applied Sciences**  
-      BSc Applied Computer Science and Electronics  
-      Sep. 2022 -- Aug. 2023
-
-  - label: "Projects"
-    body: |
-      **Traffic and Crowd Monitoring System**  
-      BSc thesis project for real-time traffic and crowd monitoring using Python, OpenCV, YOLOv8 and PostgreSQL.  
-      [GitHub](https://github.com/AliCS-dev/traffic-crowd-monitoring-app)
-
-      **Mosaic-RAG**  
-      Modular Retrieval-Augmented Generation architecture using Python, FastAPI and Docker.  
-      [GitHub](https://github.com/AliCS-dev/Mosaic-RAG)
-
-      **Object Detection using YOLOv8**  
-      Computer vision project developed during the Aalto University Summer School using real-world image analysis workflows.  
-      [GitHub](https://github.com/AliCS-dev/Object-Detection-using-YOLOv8)
-
-      **FlashRAG Research Work**  
-      Research internship work involving FlashRAG, retrieval pipelines, benchmark datasets and RAG evaluation.  
-      [GitHub](https://github.com/AliCS-dev/FlashRAG)
-
-  - label: "Technical Skills"
-    body: |
-      **Languages:** C++/C, Python, Java, SQL, JavaScript, TypeScript
-
-      **AI & Machine Learning:** ONNX, YOLOv8, OpenCV, PyTorch, Retrieval-Augmented Generation
-
-      **Backend Development:** FastAPI, Flask, REST APIs
-
-      **Databases:** PostgreSQL, MySQL
-
-      **DevOps & Tools:** Linux, Docker, Git, GitHub Actions, WSL2
-
-      **Cloud:** AWS Solutions Architect Associate (Certification in Progress)
+      **Aalto University Summer School**
+      Introduction to Artificial Intelligence and Machine Learning
+      July 2025 to Aug. 2025
 
 footer: |
-  © 2026 Muhammad Ali Khan 
- 
+  © 2026 Muhammad Ali Khan
