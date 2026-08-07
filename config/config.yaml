@@ -18,8 +18,6 @@ profile:
     - "AI and Machine Learning"
   bio: |
     I am a Computer Science student interested in embedded systems, Linux, networking and dependable software that works close to real hardware.
-
-    I enjoy using software to understand and improve real environments, from UAV simulation and sensors to computer vision and practical AI systems.
   links:
     - type: github
       url: "https://github.com/AliCS-dev"
