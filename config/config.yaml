@@ -17,7 +17,7 @@ profile:
     - "Distributed Systems"
     - "AI and Machine Learning"
   bio: |
-    I am a Computer Science student interested in embedded systems, Linux, networking and dependable software that works close to real hardware.
+    I am a Computer Science student interested in embedded systems, Linux, networking and software that works close to real hardware.
   links:
     - type: github
       url: "https://github.com/AliCS-dev"
@@ -45,7 +45,6 @@ projects:
 now:
   - "Building an urban UAV logistics simulation in MATLAB and Simulink"
   - "Preparing for AWS Solutions Architect Associate"
-  - "Continuing Mosaic RAG research"
   - "Developing C++ and Linux systems skills"
 
 experience:
