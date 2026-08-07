@@ -8,18 +8,18 @@ site:
 
 profile:
   name: "Muhammad Ali Khan"
-  role: "Computer Science student building systems across **C++ and Linux**, cloud infrastructure, engineering simulation and applied AI."
+  role: "Computer Science Student"
   photo: "assets/images/profile.jpeg"
   email: "muhammadalikhanhitec@gmail.com"
   research:
-    - "Systems"
-    - "Cloud"
-    - "Simulation"
-    - "AI Infrastructure"
+    - "Systems Programming"
+    - "Computer Vision"
+    - "Distributed Systems"
+    - "AI and Machine Learning"
   bio: |
-    I enjoy building systems where software has to interact with real constraints: compute, networks, sensors, hardware and physical environments.
+    I am a Computer Science student interested in embedded systems, Linux, networking and dependable software that works close to real hardware.
 
-    My current work focuses on C++ and Linux systems, AWS and distributed systems, MATLAB and Simulink engineering simulation, and applied AI.
+    I enjoy using software to understand and improve real environments, from UAV simulation and sensors to computer vision and practical AI systems.
   links:
     - type: github
       url: "https://github.com/AliCS-dev"
@@ -29,22 +29,16 @@ profile:
 projects:
   - title: "Urban UAV Logistics Simulation"
     featured: true
-    image: "assets/images/projects/budapest-urban-scenario.png"
-    image_label: "Budapest simulation render"
     description: "An urban drone logistics simulation built from real terrain and OpenStreetMap building data. I am developing the simulation for route planning, sensor modelling and safe UAV flights in Budapest and Pécs."
     technologies: ["MATLAB", "Simulink", "UAV Toolbox", "GNSS", "LiDAR"]
     github: "https://github.com/AppliedSystems-Lab/Multi-UAV-Path-Planning"
     details: "https://github.com/AppliedSystems-Lab/Multi-UAV-Path-Planning#readme"
   - title: "Mosaic-RAG"
-    image: "assets/images/projects/mosaic-rag-architecture.svg"
-    image_label: "Architecture visual"
     description: "A modular Retrieval Augmented Generation system organised as separate retrieval, generation and evaluation services. It is designed to make experiments and deployment easier to reason about."
     technologies: ["Python", "FastAPI", "Docker", "RAG"]
     github: "https://github.com/AliCS-dev/Mosaic-RAG"
     details: "https://github.com/AliCS-dev/Mosaic-RAG#readme"
   - title: "Traffic and Crowd Monitoring System"
-    image: "assets/images/projects/traffic-monitoring-pipeline.svg"
-    image_label: "Processing pipeline visual"
     description: "A BSc thesis project for real time traffic and crowd monitoring. It brings together video analysis, object detection and data storage in one engineering system."
     technologies: ["YOLOv8", "OpenCV", "PostgreSQL", "Python"]
     github: "https://github.com/AliCS-dev/traffic-crowd-monitoring-app"
@@ -63,6 +57,20 @@ experience:
     term: "May to July 2026"
     description: "Worked on RAG systems, retrieval evaluation, FlashRAG and the Mosaic RAG microservice architecture using FastAPI and Docker."
 
+organisation:
+  name: "Applied Systems Lab"
+  image: "https://avatars.githubusercontent.com/u/297895979?v=4"
+  url: "https://github.com/AppliedSystems-Lab"
+  description: "A GitHub organisation for practical work in C and C++, systems programming, embedded computing, cloud infrastructure and applied systems."
+
+education:
+  - institution: "University of Pécs"
+    programme: "BSc Computer Science"
+    term: "Sep. 2023 to Present"
+  - institution: "Aalto University Summer School"
+    programme: "Introduction to Artificial Intelligence and Machine Learning"
+    term: "July 2025 to Aug. 2025"
+
 cv:
   file: "assets/pdf/Khan_Ali_CV.pdf"
   description: "Last updated: June 2026."
@@ -80,15 +88,5 @@ sections:
         items: ["MATLAB", "Simulink", "UAV Modelling"]
       - title: "Applied AI"
         items: ["Computer Vision", "RAG", "ONNX and Deployment"]
-  - label: "Education"
-    body: |
-      **University of Pécs**
-      BSc Computer Science
-      Sep. 2023 to Present
-
-      **Aalto University Summer School**
-      Introduction to Artificial Intelligence and Machine Learning
-      July 2025 to Aug. 2025
-
 footer: |
   © 2026 Muhammad Ali Khan
