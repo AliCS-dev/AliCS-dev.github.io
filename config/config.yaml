@@ -1,13 +1,13 @@
 site:
-  title: "Muhammad Ali Khan"
-  description: "Muhammad Ali Khan builds systems across C++ and Linux, cloud infrastructure, engineering simulation and applied AI."
+  title: "Ali"
+  description: "Ali builds systems across C++ and Linux, cloud infrastructure, engineering simulation and applied AI."
   url: "https://alics-dev.github.io"
   favicon: "assets/images/favicon.png"
   accent: "#4f46e5"
   default_theme: "auto"
 
 profile:
-  name: "Muhammad Ali Khan"
+  name: "Ali"
   role: "Computer Science Student"
   photo: "assets/images/profile.jpeg"
   email: "muhammadalikhanhitec@gmail.com"
@@ -88,4 +88,4 @@ sections:
       - title: "Applied AI"
         items: ["Computer Vision", "RAG", "ONNX and Deployment"]
 footer: |
-  © 2026 Muhammad Ali Khan
+  © 2026 Ali
