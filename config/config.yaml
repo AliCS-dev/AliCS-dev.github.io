@@ -15,7 +15,6 @@ profile:
     - "Systems Programming"
     - "Robotics"
     - "Computer Vision"
-    - "Distributed Systems"
     - "Machine Learning"
   bio: |
     I am a Computer Science student interested in embedded systems, robotics and software that connects physical systems with cloud and AI technologies
