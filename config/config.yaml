@@ -11,13 +11,14 @@ profile:
   role: "Computer Science Student"
   photo: "assets/images/profile.jpeg"
   email: "muhammadalikhanhitec@gmail.com"
-  research:
+  interests:
     - "Systems Programming"
+    - "Robotics"
     - "Computer Vision"
     - "Distributed Systems"
-    - "AI and Machine Learning"
+    - "Machine Learning"
   bio: |
-    I am a Computer Science student interested in embedded systems, Linux, networking and software that works close to real hardware.
+    I am a Computer Science student interested in embedded systems, robotics, computer vision, distributed systems and machine learning.
   links:
     - type: github
       url: "https://github.com/AliCS-dev"
@@ -44,8 +45,9 @@ projects:
 
 now:
   - "Building an urban UAV logistics simulation in MATLAB and Simulink"
-  - "Preparing for AWS Solutions Architect Associate"
-  - "Developing C++ and Linux systems skills"
+  - "Learning Assembly(6502, x86) and C for embedded systems"
+  - "Working on hardware and embedded systems projects with Raspberry Pi"
+  - "Studying backend development, APIs, databases and system design"
 
 experience:
   - role: "Research Intern"
@@ -77,15 +79,15 @@ sections:
   - label: "Technical Skills"
     type: "areas"
     areas:
-      - title: "Systems"
-        items: ["C and C++", "Linux", "Raspberry Pi", "Networking"]
-      - title: "Cloud"
-        items: ["AWS", "Docker", "Distributed Systems"]
+      - title: "Programming"
+        items: ["C/C++", "Python", "Java","Matlab","SQL","Bash","Typescript"]
+      - title: "Backend & Cloud"
+        items: ["AWS", "Docker","FastAPI","RestAPI","PostgreSQL"]
       - title: "Simulation"
-        items: ["MATLAB", "Simulink", "UAV Modelling", "OpenRocket Simulator"]
-      - title: "Hardware and Design"
-        items: ["Autodesk Fusion", "Altium Designer", "Quartus Prime", "Tinkercad"]
+        items: ["Simulink", "UAV Modelling"]
+      - title: "Embedded Systems & Hardware"
+        items: ["Raspberry Pi","Autodesk Fusion", "Altium Designer", "Quartus Prime", "Tinkercad"]
       - title: "Applied AI"
-        items: ["Computer Vision", "RAG", "ONNX and Deployment"]
+        items: ["Pytorch","Computer Vision", "RAG", "ONNX and Deployment"]
 footer: |
   © 2026 Ali
