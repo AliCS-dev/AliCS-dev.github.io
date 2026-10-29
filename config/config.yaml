@@ -11,14 +11,14 @@ profile:
   role: "Computer Science Student"
   photo: "assets/images/profile.jpeg"
   email: "muhammadalikhanhitec@gmail.com"
-  tags:
+  research:
     - "Systems Programming"
     - "Robotics"
     - "Computer Vision"
     - "Distributed Systems"
     - "Machine Learning"
   bio: |
-    I am a Computer Science student interested in embedded systems, robotics, computer vision, distributed systems and machine learning.
+    I am a Computer Science student interested in embedded systems, robotics and software that connects physical systems with cloud and AI technologies
   links:
     - type: github
       url: "https://github.com/AliCS-dev"
