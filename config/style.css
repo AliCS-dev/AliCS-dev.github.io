@@ -843,18 +843,19 @@ img {
 
 .areas-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 0.8rem;
+  width: 100%;
 }
 
 .area {
+  display: block;
   grid-column: span 2;
 
-  min-height: 150px;
   padding: 1rem 1.05rem;
+  min-width: 0;
 
   background: var(--bg);
-
   border: 1px solid var(--border);
   border-radius: 10px;
 
@@ -864,13 +865,6 @@ img {
     box-shadow var(--transition);
 }
 
-.area:hover {
-  transform: translateY(-3px);
-  border-color: var(--accent);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-}
-
-/* Center second row */
 .area:nth-child(4) {
   grid-column: 2 / span 2;
 }
@@ -879,8 +873,17 @@ img {
   grid-column: 4 / span 2;
 }
 
+.area:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
 .area-title {
+  display: block;
   margin: 0 0 0.7rem;
+
+  color: var(--text);
 
   font-size: 0.96rem;
   font-weight: 700;
@@ -888,17 +891,19 @@ img {
 }
 
 .area-list {
+  display: block;
+
   margin: 0;
   padding: 0;
 
   list-style: none;
 
   color: var(--muted);
-
   font-size: 0.86rem;
 }
 
 .area-list li {
+  display: list-item;
   margin-bottom: 0.42rem;
 }
 
@@ -906,6 +911,27 @@ img {
   margin-bottom: 0;
 }
 
+
+/* Tablet */
+@media (max-width: 700px) {
+  .areas-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .area,
+  .area:nth-child(4),
+  .area:nth-child(5) {
+    grid-column: auto;
+  }
+}
+
+
+/* Mobile */
+@media (max-width: 480px) {
+  .areas-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
 /* ==============================================================
    General Body Lists
