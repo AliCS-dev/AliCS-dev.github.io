@@ -11,7 +11,7 @@ profile:
   role: "Computer Science Student"
   photo: "assets/images/profile.jpeg"
   email: "muhammadalikhanhitec@gmail.com"
-  interests:
+  tags:
     - "Systems Programming"
     - "Robotics"
     - "Computer Vision"
@@ -85,7 +85,7 @@ sections:
         items: ["AWS", "Docker","FastAPI","RestAPI","PostgreSQL"]
       - title: "Simulation"
         items: ["Simulink", "UAV Modelling"]
-      - title: "Embedded Systems & Hardware"
+      - title: "Embedded Systems & Hardware Design"
         items: ["Raspberry Pi","Autodesk Fusion", "Altium Designer", "Quartus Prime", "Tinkercad"]
       - title: "Applied AI"
         items: ["Pytorch","Computer Vision", "RAG", "ONNX and Deployment"]
