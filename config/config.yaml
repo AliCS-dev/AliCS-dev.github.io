@@ -75,22 +75,23 @@ cv:
   embed: true
 
 sections:
-  - label: "Technical Skills"
-    type: "areas"
-    areas:
-  - title: "Programming"
-    items: ["C/C++", "Python", "Java", "MATLAB", "SQL", "Bash", "TypeScript"]
+- label: "Technical Skills"
+  type: "areas"
+  areas:
+    - title: "Programming"
+      items: ["C/C++", "Python", "Java", "MATLAB", "SQL", "Bash", "TypeScript"]
 
-  - title: "Embedded Systems & Hardware"
-    items: ["Raspberry Pi", "Autodesk Fusion", "Altium Designer", "Quartus Prime"]
+    - title: "Embedded Systems & Hardware"
+      items: ["Raspberry Pi", "Autodesk Fusion", "Altium Designer", "Quartus Prime"]
 
-  - title: "Backend & Cloud"
-    items: ["AWS", "Docker", "FastAPI", "REST APIs", "PostgreSQL"]
+    - title: "Backend & Cloud"
+      items: ["AWS", "Docker", "FastAPI", "REST APIs", "PostgreSQL"]
 
-  - title: "Simulation"
-    items: ["Simulink", "UAV Simulation & Modelling"]
+    - title: "Simulation"
+      items: ["Simulink", "UAV Simulation & Modelling"]
 
-  - title: "Applied AI"
-    items: ["PyTorch", "Computer Vision", "RAG", "ONNX & Deployment"]
+    - title: "Applied AI"
+      items: ["PyTorch", "Computer Vision", "RAG", "ONNX & Deployment"]
+
 footer: |
   © 2026 Ali
