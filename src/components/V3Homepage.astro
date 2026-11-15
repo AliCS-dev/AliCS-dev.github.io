@@ -1,0 +1,262 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import EngineeringWorkbench from '../components/EngineeringWorkbench.astro';
+import ProjectEntry from '../components/ProjectEntry.astro';
+import MosaicArchitecture from '../components/MosaicArchitecture.astro';
+import EngineeringFlow from '../components/EngineeringFlow.astro';
+import AtlasIndex from '../components/AtlasIndex.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import portrait from '../../assets/images/profile.jpeg';
+import pecsScenario from '../assets/pecs-urban-scenario.png';
+import bankingSchema from '../assets/banking-schema.png';
+import trafficAnalysis from '../assets/traffic-analysis.png';
+import { atlasProjects } from '../data/atlas';
+---
+
+<BaseLayout
+  title="Engineer's Atlas | Ali"
+  description="Ali's engineering portfolio covering systems, simulation, robotics, and applied AI."
+>
+  <SiteHeader slot="header" />
+  <div class="shell">
+    <section class="hero" aria-labelledby="intro-title">
+      <div class="intro">
+        <div class="identity">
+          <Image src={portrait} alt="" width={160} loading="eager" />
+          <p class="eyebrow">Ali · Computer Science Student</p>
+        </div>
+        <h1 id="intro-title"><span>The Engineer’s</span> <em>Atlas</em></h1>
+        <p class="intro-copy">
+          I’m interested in embedded systems, robotics, and the software that
+          connects physical systems with cloud infrastructure and AI.
+        </p>
+        <a class="action" href="#work">Explore my work <span aria-hidden="true">↓</span></a>
+      </div>
+      <EngineeringWorkbench />
+    </section>
+
+    <section id="work" class="band" aria-labelledby="work-title">
+      <div class="section-head">
+        <AtlasIndex index="02" label="Project plates" />
+        <h2 id="work-title" class="section-title">Projects</h2>
+      </div>
+      <ProjectEntry
+        id="project-urban-uav"
+        layout="featured"
+        plate={{ index: '02.1', label: 'Mission planning', figureLabel: 'Simulation output / Pécs scene' }}
+        title={atlasProjects['urban-uav'].title}
+        category="Featured · Simulation"
+        summary="A MATLAB and Simulink project exploring path planning for urban air mobility."
+        href={atlasProjects['urban-uav'].repository}
+        image={{
+          src: pecsScenario,
+          alt: 'MATLAB plot showing building geometry and a flight path in the Pécs urban scenario',
+          caption: 'Pécs urban scenario · MATLAB simulation',
+        }}
+        note="Technical case study under review."
+      >
+        <EngineeringFlow
+          slot="flow"
+          label="Budapest planner experiment"
+          source="https://github.com/AppliedSystems-Lab/Multi-UAV-Path-Planning/blob/main/Autonomous_Planner.m"
+          steps={[
+            { title: 'Map the scene', detail: 'Simulated lidar → 3D occupancy map' },
+            { title: 'Plan a route', detail: 'RRT* searches the mapped space' },
+            { title: 'Fly in simulation', detail: 'Waypoints drive the UAV trajectory' },
+          ]}
+        />
+      </ProjectEntry>
+      <ProjectEntry
+        id="project-banking"
+        layout="reversed"
+        plate={{ index: '02.2', label: 'Application architecture', figureLabel: 'Data model / entity relationships' }}
+        title={atlasProjects.banking.title}
+        category="Full stack · Team project"
+        summary="A React interface for opening accounts and submitting deposits or withdrawals. A NestJS API handles JWT authentication and records account and transaction data in PostgreSQL."
+        href={atlasProjects.banking.repository}
+        image={{
+          src: bankingSchema,
+          alt: 'Banking database design linking customers and account owners to accounts, transactions, and transaction entries',
+          caption: 'Team database diagram · Open the original for table and key details',
+          source: 'https://github.com/AliCS-dev/banking-app/blob/9c4d0fd6b698003cb085567eb1f3aff3a1bdea32/backend/db/ERD.png',
+        }}
+      >
+        <EngineeringFlow
+          slot="flow"
+          label="Application architecture"
+          steps={[
+            { title: 'React browser UI', detail: 'Account and transaction forms' },
+            { title: 'NestJS API', detail: 'JWT auth and account operations' },
+            { title: 'PostgreSQL', detail: 'Accounts and transaction records via TypeORM' },
+          ]}
+        />
+      </ProjectEntry>
+      <ProjectEntry
+        id="project-traffic-monitoring"
+        plate={{ index: '02.3', label: 'Analysis evidence', figureLabel: 'Application capture / grid-cell inspection' }}
+        title={atlasProjects['traffic-monitoring'].title}
+        category="Computer vision · BSc thesis"
+        summary="An experimental tool for inspecting detections in aerial images and sampled video frames. The browser shows predicted boxes and counts by grid cell, and PostgreSQL stores results for later review."
+        note="The detector failed its evaluation quality gate. Dense crowd counting is unsupported."
+        href={atlasProjects['traffic-monitoring'].repository}
+        image={{
+          src: trafficAnalysis,
+          alt: 'Traffic analysis application showing a development roundabout image with predicted boxes, a grid overlay, and a cell inspection panel',
+          caption: 'Development capture showing predictions and grid-cell inspection',
+          source: 'https://github.com/AliCS-dev/traffic-crowd-monitoring-app/blob/5cbd433eebed9678f2e288329d4a99b8ad295cc4/docs/images/user-guide/image-result.png',
+        }}
+      >
+        <EngineeringFlow
+          slot="flow"
+          label="Analysis pipeline"
+          steps={[
+            { title: 'Prepare media', detail: 'Validate uploads and sample video frames' },
+            { title: 'Run inference', detail: 'Predict boxes and count by grid cell' },
+            { title: 'Store and review', detail: 'Persist results for browser inspection' },
+          ]}
+        />
+        <p slot="credit" class="media-credit">
+          Aerial image by Sergio Ghisler, Javier Sanchez-Soriano and Sergio Bemposta Rosende
+          (<a href="https://zenodo.org/records/5776219">source data</a>,{' '}
+          <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>).
+          The app resized the input and added prediction and grid overlays.
+        </p>
+      </ProjectEntry>
+      <ProjectEntry
+        id="project-mosaic-rag"
+        layout="architecture"
+        plate={{ index: '02.4', label: 'Service protocol' }}
+        title={atlasProjects['mosaic-rag'].title}
+        category="Applied AI · Research prototype"
+        summary="This prototype separates document retrieval from answer generation so each service can be tested independently. The API retrieves documents first, then sends those documents and the query to the generator."
+        href={atlasProjects['mosaic-rag'].repository}
+      >
+        <MosaicArchitecture slot="media" />
+      </ProjectEntry>
+    </section>
+
+    <section id="practice" class="band" aria-labelledby="practice-title">
+      <div class="section-head">
+        <AtlasIndex index="03" label="Capability registry" />
+        <h2 id="practice-title" class="section-title">Engineering <em>practice</em></h2>
+      </div>
+      <dl class="practice">
+        <div>
+          <dt>Simulation and planning</dt>
+          <dd>Build occupancy maps from simulated lidar and test planned trajectories. <a href="#project-urban-uav">UAV simulation</a></dd>
+        </div>
+        <div>
+          <dt>APIs and relational data</dt>
+          <dd>Connect account workflows to authentication and transaction records. <a href="#project-banking">Banking app</a></dd>
+        </div>
+        <div>
+          <dt>Computer vision pipelines</dt>
+          <dd>Process aerial media and make predictions inspectable by frame or grid cell. <a href="#project-traffic-monitoring">Traffic thesis</a></dd>
+        </div>
+        <div>
+          <dt>Retrieval and generation</dt>
+          <dd>Keep document retrieval and answer generation in separate services. <a href="#project-mosaic-rag">Mosaic-RAG</a></dd>
+        </div>
+      </dl>
+    </section>
+
+    <section id="about" class="band about" aria-labelledby="about-title">
+      <div>
+        <AtlasIndex index="04" label="Profile and research" />
+        <h2 id="about-title" class="section-title">About</h2>
+        <p>I’m Ali, a computer science student interested in robotics and how software connects physical systems with cloud infrastructure and AI.</p>
+        <dl class="background">
+          <div>
+            <dt>Education</dt>
+            <dd>BSc Computer Science · University of Pécs</dd>
+          </div>
+          <div>
+            <dt>Research internship · May to July 2026</dt>
+            <dd>Trustworthy Artificial Intelligence Laboratory, University of Cagliari. Worked on retrieval augmented generation and retrieval evaluation.</dd>
+          </div>
+        </dl>
+        <a class="action" href="#contact">Get in touch <span aria-hidden="true">↓</span></a>
+      </div>
+      <figure>
+        <Image
+          src={portrait}
+          alt="Portrait of Ali"
+          width={720}
+          widths={[320, 480, 720]}
+          sizes="(max-width: 380px) calc(100vw - 2rem), (max-width: 768px) 272px, min(28vw, 300px)"
+          loading="lazy"
+        />
+        <figcaption>Ali <span aria-hidden="true">+</span></figcaption>
+      </figure>
+    </section>
+  </div>
+  <SiteFooter slot="footer" />
+</BaseLayout>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+    gap: clamp(1.6rem, 3.5vw, 4rem);
+    align-items: center;
+    padding-block: clamp(1.8rem, 3.65vw, 3.75rem);
+  }
+  .intro { display: grid; gap: clamp(0.85rem, 1.5vw, 1.3rem); justify-items: start; min-width: 0; }
+  .identity { display: flex; align-items: center; gap: var(--space-3); }
+  .identity img {
+    flex: none;
+    width: 3.25rem;
+    height: 3.25rem;
+    object-fit: cover;
+    object-position: 52% 58%;
+  }
+  h1 { font-size: clamp(2rem, 4.35vw, 4.6rem); font-weight: 600; line-height: 1; letter-spacing: -0.055em; }
+  h1 span, h1 em { display: block; }
+  h1 em { font-size: 1.2em; line-height: 0.94; }
+  .intro-copy { max-width: 41ch; font-size: var(--step-0); text-wrap: pretty; }
+  .action { display: inline-flex; align-items: center; gap: 0.6em; min-height: 2.75rem; }
+  .band { padding-block: clamp(1.35rem, 2.4vw, 2.3rem); border-top: 1px solid var(--color-ink); }
+  #work { padding-block-end: 0.5rem; }
+  .section-title { margin-bottom: var(--space-4); font-size: var(--step-2); line-height: 1.05; letter-spacing: -0.045em; }
+  .section-head { display: grid; gap: 0.4rem; }
+  .practice {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 clamp(1.25rem, 4vw, 4rem);
+    padding: 0.4rem clamp(0.75rem, 2vw, 1.5rem);
+    background: var(--color-sheet);
+    border-block: 1px solid var(--color-rule);
+  }
+  .practice > div { padding-block: 0.65rem; }
+  .practice > div:nth-child(n+3) { border-top: 1px solid var(--color-rule); }
+  .practice dt { display: flex; align-items: baseline; gap: 0.5rem; }
+  .practice dt::before { content: ''; flex: none; width: 0.4rem; height: 0.4rem; border: 1px solid var(--color-accent); rotate: 45deg; }
+  .practice dd { padding-inline-start: 0.9rem; }
+  .practice a { font-family: var(--font-mono); font-size: 0.78rem; }
+  dt { font-weight: 700; }
+  dd { max-width: 58ch; }
+  .media-credit { margin-block-start: 0.5rem; max-width: 72ch; font-size: 0.75rem; }
+  .about { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 7fr); align-items: center; gap: clamp(1rem, 3vw, 2.5rem); }
+  .about figure { width: 100%; max-width: 18.75rem; border-block: 1px solid var(--color-rule); padding-block-start: 0.45rem; }
+  .about figcaption { display: flex; justify-content: space-between; padding: 0.4rem 0.65rem; background: var(--color-sheet); font: 500 0.75rem/1.4 var(--font-mono); }
+  .about figcaption span { color: var(--color-accent); }
+  .about .section-title { margin-block-start: 0.4rem; }
+  .about img { width: 100%; aspect-ratio: 1; object-fit: cover; object-position: center 57%; }
+  .about p { max-width: 52ch; margin-bottom: var(--space-2); font-size: var(--step-0); }
+  .background > div { border-top: 1px solid var(--color-rule); padding-block: 0.45rem; }
+  .background dt { font: 500 0.75rem/1.45 var(--font-mono); color: var(--color-accent); }
+  @media (max-width: 48rem) {
+    .hero, .about { grid-template-columns: minmax(0, 1fr); }
+    .about figure { max-width: 17rem; }
+  }
+  @media (max-width: 35rem) {
+    .practice { grid-template-columns: minmax(0, 1fr); }
+    .practice > div + div { border-top: 1px solid var(--color-rule); }
+  }
+  @media (width > 48rem) {
+    .about figure { grid-area: 1 / 1; }
+    .about > div { grid-area: 1 / 2; }
+  }
+</style>

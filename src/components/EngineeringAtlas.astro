@@ -1,0 +1,139 @@
+---
+import AtlasConnections from './AtlasConnections.astro';
+import { atlasDisciplines, atlasProjects, projectHref, type AtlasProjectId } from '../data/atlas';
+
+interface Props {
+  projects?: readonly { id: AtlasProjectId; summary: string; href: string }[];
+}
+const { projects = [] } = Astro.props;
+const projectIds = ['urban-uav', 'mosaic-rag', 'banking', 'traffic-monitoring'] as const;
+const projectDetails = new Map(projects.map(project => [project.id, project]));
+const hrefFor = (id: AtlasProjectId) => projectDetails.get(id)?.href ?? projectHref(id);
+---
+
+<aside class="atlas" aria-labelledby="atlas-title" data-engineering-atlas>
+  <header>
+    <h2 id="atlas-title">Engineering Atlas</h2>
+    <p>Select a discipline or project to explore its connections.</p>
+  </header>
+  <div class="atlas-grid">
+    <AtlasConnections />
+    <div class="atlas-list">
+      <nav aria-label="Engineering disciplines">
+        <span class="column-label" aria-hidden="true">Disciplines</span>
+        {atlasDisciplines.map(({ id, label }) => (
+          <a href={`#atlas-${id}`} data-atlas-select={id}>{label}</a>
+        ))}
+      </nav>
+      <nav aria-label="Engineering projects">
+        <span class="column-label" aria-hidden="true">Projects</span>
+        {projectIds.map(id => (
+          <a href={`#atlas-project-${id}`} data-atlas-project={id}>{atlasProjects[id].label}</a>
+        ))}
+      </nav>
+    </div>
+  </div>
+  <ul class="map-key" aria-label="Connection key">
+    <li><span class="key-route" aria-hidden="true"></span> Active connection</li>
+    <li><span class="key-other" aria-hidden="true"></span> Other connection</li>
+  </ul>
+  <div class="atlas-panel">
+    {atlasDisciplines.map(({ id, label, description, projects }) => (
+      <section id={`atlas-${id}`} data-atlas-detail={id} aria-labelledby={`atlas-heading-${id}`}>
+        <h3 id={`atlas-heading-${id}`}>{label}</h3>
+        <p>{description}</p>
+        <ul>
+          {projects.map(project => <li><a href={hrefFor(project)}>{atlasProjects[project].title} <span aria-hidden="true">→</span></a></li>)}
+        </ul>
+      </section>
+    ))}
+    {projectIds.map(id => (
+      <section id={`atlas-project-${id}`} data-atlas-detail={`project-${id}`} aria-labelledby={`atlas-heading-project-${id}`}>
+        <h3 id={`atlas-heading-project-${id}`}>{atlasProjects[id].title}</h3>
+        {projectDetails.get(id)?.summary && <p>{projectDetails.get(id)?.summary}</p>}
+        <p class="disciplines">{atlasDisciplines.filter(({ projects }) => (projects as readonly AtlasProjectId[]).includes(id)).map(discipline => discipline.label).join(' · ')}</p>
+        <ul><li><a href={hrefFor(id)}>{projects.length ? 'Read case study' : 'View project'} <span aria-hidden="true">→</span></a></li></ul>
+      </section>
+    ))}
+  </div>
+  <span class="atlas-status" role="status" data-atlas-status></span>
+</aside>
+
+<script>
+  import { initEngineeringAtlas } from '../scripts/engineering-atlas';
+
+  document.querySelectorAll<HTMLElement>('[data-engineering-atlas]').forEach(initEngineeringAtlas);
+</script>
+
+<style>
+  .atlas { min-width: 0; background: var(--color-canvas); border: 1px solid var(--color-rule); container-type: inline-size; }
+  header { display: grid; gap: 0.25rem; padding: 0.9rem 1rem; border-block-start: 2px solid var(--color-accent); }
+  h2 { font: 400 1.6rem/1.1 var(--font-editorial); }
+  p { font-size: 1rem; line-height: 1.5; }
+  .atlas-grid {
+    display: grid;
+    place-items: center;
+    border-block: 1px solid var(--color-rule);
+    background-image: linear-gradient(var(--color-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-grid) 1px, transparent 1px);
+    background-size: 1.5rem 1.5rem;
+    background-position: -1px -1px;
+  }
+  .atlas-list {
+    display: none;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+    width: 100%;
+    padding: 0.75rem;
+  }
+  .atlas-list nav { display: grid; gap: .4rem; grid-template-rows: auto repeat(4, minmax(2.75rem, 1fr)); min-width: 0; }
+  .column-label { font: 500 .75rem/1.4 var(--font-mono); color: var(--color-accent); text-transform: uppercase; letter-spacing: .06em; }
+  .atlas-list a {
+    display: grid;
+    place-content: center;
+    min-height: 2.75rem;
+    padding: 0.35rem;
+    border: 1px solid #766e66;
+    background: var(--color-canvas);
+    font: 0.8125rem/1.35 var(--font-mono);
+    text-align: center;
+    text-decoration: none;
+  }
+  .atlas-list a:hover, .atlas-list a[data-active], .atlas-list a[aria-current="true"] {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+    text-decoration: underline;
+  }
+  .atlas-list a[aria-current="true"] { background: #efe1d9; }
+  .atlas-panel { border-inline-start: 2px solid var(--color-accent); background: #efe8df; }
+  section { padding: 0.8rem 1rem; scroll-margin-block: 1rem; }
+  section + section { border-block-start: 1px solid var(--color-rule); }
+  .atlas[data-ready] section { border-block-start: 0; }
+  section:target { outline: 2px solid var(--color-accent); outline-offset: -2px; }
+  h3 { color: var(--color-accent); font-size: 1.2rem; margin-block-end: 0.3rem; }
+  .disciplines { margin-top: .3rem; font: .75rem/1.4 var(--font-mono); }
+  ul { display: flex; flex-wrap: wrap; gap: 0 1.125rem; list-style: none; margin: 0.22rem 0 0; padding: 0; }
+  li a { display: inline-flex; align-items: center; gap: 0.35em; min-height: 2.75rem; font-size: 1rem; }
+  li a span { color: var(--color-accent); }
+  .atlas-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .map-key {
+    margin: 0;
+    padding: 0.5rem 1rem;
+    gap: 0.35rem 1rem;
+    border-block-end: 1px solid var(--color-rule);
+    font: 0.75rem/1.35 var(--font-mono);
+  }
+  .map-key li { display: flex; gap: 0.35rem; align-items: center; }
+  .map-key .key-route { width: 1rem; border-block-start: 2px solid var(--color-accent); }
+  .map-key .key-other { width: 1rem; border-block-start: 1px dashed #766e66; }
+  @container (width < 28rem) {
+    .atlas-grid :global(.atlas-connections) { display: none; }
+    .atlas-list { display: grid; }
+    .map-key { display: none; }
+  }
+  @media (max-width: 48rem), (pointer: coarse) {
+    .atlas-grid :global(.atlas-connections) { display: none; }
+    .atlas-list { display: grid; }
+    .map-key { display: none; }
+  }
+</style>

@@ -1,0 +1,81 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '../../../assets/images/profile.jpeg';
+import EngineeringAtlas from '../EngineeringAtlas.astro';
+import { caseStudies, caseHref } from '../../data/cases';
+
+const projects = caseStudies.map(project => ({
+  id: project.id,
+  summary: project.summary,
+  href: caseHref(project.id),
+}));
+---
+
+<section class="atlas-hero" aria-labelledby="home-title">
+  <div class="shell hero-layout">
+    <div class="hero-copy">
+      <h1 id="home-title" class="v4-kicker hero-title">Engineering Portfolio</h1>
+      <div class="hero-intro">
+        <div class="hero-portrait">
+          <Image src={portrait} alt="Portrait of Ali" width={240} widths={[160, 192, 240, 320, 384, 480]} sizes="(max-width: 760px) 160px, (max-width: 1000px) 192px, 240px" loading="eager" />
+        </div>
+        <p>I’m Ali, a computer science student working across simulation, computer vision, full stack systems and applied AI.</p>
+      </div>
+      <a class="v4-button" href="#work">Explore projects <span aria-hidden="true">→</span></a>
+    </div>
+    <EngineeringAtlas {projects} />
+  </div>
+</section>
+
+<style>
+  .atlas-hero { background: var(--color-sheet); border-bottom: 1px solid var(--color-rule); }
+  .hero-layout {
+    display: grid;
+    grid-template-columns: var(--v4-columns);
+    gap: var(--v4-column-gap);
+    align-items: start;
+    padding-block: clamp(1rem, 1.65vw, 1.75rem);
+  }
+  .hero-copy {
+    display: grid;
+    justify-items: start;
+    gap: clamp(.9rem, 1.5vw, 1.25rem);
+    margin-block-start: min(10vw, 9rem);
+  }
+  .hero-title { font-size: clamp(1.125rem, .95rem + .55vw, 1.5rem); }
+  .hero-intro {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(.75rem, 1.4vw, 1rem);
+    max-width: 34rem;
+    font-size: var(--v4-body);
+    line-height: 1.58;
+  }
+  .hero-intro p { text-wrap: pretty; }
+  .hero-portrait {
+    position: relative;
+    inline-size: 7.5rem;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border: 1px solid var(--color-accent);
+    border-radius: 50%;
+  }
+  .hero-portrait img {
+    position: absolute;
+    inset: -87% auto auto -50%;
+    width: 200%;
+    max-width: none;
+  }
+  @media (width < 64rem) {
+    .hero-layout { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); }
+  }
+  @media (max-width: 1000px) {
+    .hero-portrait { inline-size: 6rem; }
+  }
+  @media (max-width: 760px) {
+    .hero-layout { grid-template-columns: minmax(0, 1fr); row-gap: 1.5rem; }
+    .hero-copy { margin-block-start: 0; }
+    .hero-portrait { inline-size: 5rem; }
+  }
+</style>

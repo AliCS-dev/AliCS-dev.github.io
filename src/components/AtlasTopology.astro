@@ -1,0 +1,85 @@
+---
+import { atlasDisciplines, atlasProjects, projectHref, type AtlasProjectId } from '../data/atlas';
+import { sectors, waypoints } from '../data/atlas-field';
+
+const projectIds = Object.keys(waypoints) as AtlasProjectId[];
+const disciplines = atlasDisciplines.map(discipline => ({
+  ...discipline,
+  sector: sectors[discipline.id],
+}));
+---
+
+<svg class="topology" viewBox="0 0 620 390" aria-label="Field map of disciplines and project waypoints" role="group">
+  <g aria-hidden="true" class="coordinates">
+    <path d="M20 32H600V365H20ZM20 199H600M310 32V365" />
+    <path d="M20 28v8m145-8v8m145-8v8m145-8v8m145-8v8M20 361v8m145-8v8m145-8v8m145-8v8m145-8v8" />
+    <text x="20" y="21">A</text>
+    <text x="20" y="383">B</text>
+    <text x="310" y="21" text-anchor="middle">FIELD COORDINATES</text>
+    <text x="305" y="383" text-anchor="end">01</text>
+    <text x="600" y="383" text-anchor="end">02</text>
+  </g>
+
+  {disciplines.map(({ id, label, projects, sector }) => (
+    <a class="sector" href={`#atlas-${id}`} data-atlas-select={id}
+      aria-label={`${label}: ${projects.map(project => atlasProjects[project].title).join(', ')}`}>
+      <path class="boundary" d={sector.boundary} />
+      <path class="contour" d={sector.contour} aria-hidden="true" />
+      <g class="sector-label" transform={`translate(${sector.label.join(' ')})`} aria-hidden="true">
+        <text class="sector-code" y="0">{sector.code}</text>
+        <text y="21">{label}</text>
+      </g>
+    </a>
+  ))}
+
+  <g aria-hidden="true" class="routes">
+    {disciplines.map(({ id, projects, sector }) => projects.map(project => (
+      <path class="connection" data-atlas-edge data-discipline={id} data-project={project}
+        d={(sector.routes as Partial<Record<AtlasProjectId, string>>)[project]} />
+    )))}
+  </g>
+
+  {projectIds.map(id => {
+    const { x, y, anchor } = waypoints[id];
+    const label = atlasProjects[id].label;
+    const width = 36 + label.length * 10;
+    return (
+      <g transform={`translate(${x} ${y})`}>
+        <a class="waypoint" href={projectHref(id)} data-atlas-project={id}
+          aria-label={`Go to ${atlasProjects[id].title}`}>
+          <rect class="waypoint-hit" x={anchor === 'end' ? 16 - width : -16} y="-18" width={width} height="36" rx="3" />
+          <circle class="waypoint-ring" r="10" />
+          <path class="pin" d="M0-5 5 0 0 5-5 0Z" />
+          <text x={anchor === 'end' ? -16 : 16} y="0" text-anchor={anchor} dominant-baseline="central" aria-hidden="true">{label}</text>
+        </a>
+      </g>
+    );
+  })}
+</svg>
+
+<style>
+  .topology { display: block; width: 100%; height: auto; }
+  text { fill: var(--color-ink); font: 16px var(--font-mono); }
+  .coordinates path { fill: none; stroke: var(--color-rule); }
+  .coordinates text, .sector-code { fill: var(--color-accent); font-size: 12px; letter-spacing: 0.085em; }
+  .boundary { fill: #ece8dd; fill-opacity: 0.56; stroke: #82796f; stroke-width: 1.15; }
+  .contour { fill: none; stroke: #a8a19a; stroke-width: 0.9; }
+  .sector:is([data-active], [aria-current="true"]) .boundary { fill: #e8cdc4; stroke: var(--color-accent); stroke-width: 1.8; }
+  .sector[data-active] .contour { stroke: var(--color-accent); stroke-opacity: 0.45; }
+  .sector[data-active] .sector-label text { fill: var(--color-accent); }
+  .routes { pointer-events: none; }
+  .connection { fill: none; stroke: #766e66; stroke-width: 1.4; stroke-dasharray: 4 3; }
+  .connection[data-active] { stroke: var(--color-accent); stroke-width: 2.8; stroke-dasharray: none; }
+  .waypoint-hit { fill: transparent; stroke: transparent; }
+  .waypoint-ring { fill: var(--color-canvas); stroke: #766e66; stroke-width: 1.25; }
+  .pin { fill: var(--color-ink); }
+  .waypoint text { paint-order: stroke; stroke: var(--color-canvas); stroke-width: 4; stroke-linejoin: round; }
+  .waypoint[data-active] .waypoint-ring { stroke: var(--color-accent); stroke-width: 2.5; }
+  .waypoint[data-active] .pin, .waypoint[data-active] text { fill: var(--color-accent); }
+  .sector:focus-visible, .waypoint:focus-visible { outline: none; }
+  .sector:focus-visible .boundary, .waypoint:focus-visible .waypoint-hit {
+    stroke: var(--color-ink);
+    stroke-width: 3;
+    stroke-dasharray: 5 2;
+  }
+</style>

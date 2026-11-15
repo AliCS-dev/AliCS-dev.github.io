@@ -1,0 +1,31 @@
+---
+import PortfolioLayout from '../../components/v4/PortfolioLayout.astro';
+import MosaicArchitecture from '../../components/MosaicArchitecture.astro';
+---
+
+<PortfolioLayout title="Research | The Engineer’s Atlas" description="Research experience in retrieval augmented generation and a computer vision thesis.">
+  <article class="shell v4-page">
+    <p class="v4-kicker">Research experience</p>
+    <h1 class="v4-title">Research</h1>
+    <div class="research-layout">
+      <div class="v4-prose">
+        <section>
+          <h2>Retrieval and generation</h2>
+          <p>From May to July 2026, I interned at the University of Cagliari’s Trustworthy Artificial Intelligence Laboratory, working on retrieval augmented generation and retrieval evaluation. Mosaic-RAG explores the separation of retrieval and answer generation into services.</p>
+          <p><a href="/projects/mosaic-rag/">Read the Mosaic-RAG case study →</a></p>
+        </section>
+        <section>
+          <h2>Aerial computer vision</h2>
+          <p>My BSc thesis project is an experimental application for inspecting and storing model detections in aerial media. Its interface keeps detector limitations visible alongside the predicted results.</p>
+          <p><a href="/projects/traffic-monitoring/">Read the Traffic Monitoring case study →</a></p>
+        </section>
+      </div>
+      <MosaicArchitecture />
+    </div>
+  </article>
+</PortfolioLayout>
+
+<style>
+  .research-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 1.4rem 4vw; }
+  @media (max-width: 780px) { .research-layout { grid-template-columns: minmax(0, 1fr); } }
+</style>

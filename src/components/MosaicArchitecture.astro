@@ -1,0 +1,15 @@
+---
+import EngineeringFlow from './EngineeringFlow.astro';
+---
+
+<EngineeringFlow
+  label="Mosaic-RAG request flow"
+  caption="The API calls retrieval first, then sends the query and retrieved documents to generation. It returns the answer to the caller."
+  source="https://github.com/AliCS-dev/Mosaic-RAG/blob/03e9b4bbf8a28c01bfecd2fc51cf83582d2f13a4/api/main.py"
+  steps={[
+    { title: 'API', detail: 'POST /ask · receives query' },
+    { title: 'Retriever', detail: 'POST /retrieve · returns documents to API' },
+    { title: 'Generator', detail: 'POST /generate · returns answer to API' },
+  ]}
+  expanded
+/>

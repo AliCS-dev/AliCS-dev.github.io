@@ -1,11 +1,10 @@
-# Engineer's Atlas V3
+# Engineer's Atlas V4
 
-Ali's engineering portfolio, built as a static Astro site with strict TypeScript,
-native CSS, and typed Markdown content collections.
+Ali's engineering portfolio, built as a static Astro site with strict TypeScript
+and native CSS. The homepage opens with an interactive Engineering Atlas that
+connects disciplines to projects and links to their case studies.
 
-Production remains at [alics-dev.github.io](https://alics-dev.github.io/). The
-redesign is under development on a feature branch and must not be deployed
-without explicit approval.
+Production is hosted at [alics-dev.github.io](https://alics-dev.github.io/).
 
 ## Requirements
 
@@ -15,11 +14,14 @@ without explicit approval.
 ## Local development
 
 ```sh
-npm install
+npm ci
 npm run dev
 ```
 
 Astro serves the local site at `http://localhost:4321` by default.
+Select a discipline or project in the homepage hero to inspect its connections.
+On mobile, labeled HTML links replace the SVG controls. Without JavaScript, the
+atlas links jump to the corresponding summaries and case-study links.
 
 ## Validation
 
@@ -34,12 +36,26 @@ site in `dist/`.
 
 ```text
 src/
-  components/       Reusable interface components
-  content/projects/ Verified project case studies in Markdown
-  layouts/          Shared document and page layouts
-  pages/            File-based routes
-  styles/           Global design tokens and shared CSS
+  components/v4/  Portfolio layout, homepage hero, project presentation, lab scene
+  data/cases.ts   Verified case study content and evidence links
+  scripts/        Progressive interaction and WebGL fallback
+  pages/          Static homepage, projects, case studies, research and about
+  styles/        Shared design tokens and V4 styles
 ```
 
-Legacy files remain in the repository during migration so existing content and
-assets can be checked before they are moved or retired.
+The prior cinematic hero is retained in source. React Three Fiber and Three.js
+remain in use on the isolated rendering study at `/lab/v4-canvas/`. The city,
+drone, and architectural structures are conceptual. The MATLAB plot, Traffic
+capture and Banking diagram are original project artifacts. The Mosaic-RAG
+diagram is based on its API source.
+
+## Production preview and GitHub Pages
+
+Run `npm run validate` and then `npm run preview` to inspect `dist/` locally.
+The [Astro Pages workflow](.github/workflows/pages.yml) validates pull requests
+to `main` on Linux and publishes the built `dist/` artifact on pushes to `main`.
+In the repository's Pages settings, the publishing source is GitHub Actions.
+The lab route is included in the build for comparison and carries a noindex directive.
+
+The homepage uses SVG, HTML and a lightweight controller. The optional lab
+scene has a separate bundle and stays off the homepage request path.

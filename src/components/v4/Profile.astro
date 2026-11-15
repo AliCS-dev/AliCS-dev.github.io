@@ -1,0 +1,50 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '../../../assets/images/profile.jpeg';
+interface Props { full?: boolean }
+const { full = false } = Astro.props;
+---
+
+<section class:list={['shell', 'profile', { 'profile-full': full }]} aria-labelledby="profile-heading">
+  <div class="profile-text">
+    <header>
+      {full ? <><p class="v4-kicker">About / 04</p><h1 id="profile-heading" class="v4-title">About Ali</h1></> : <h2 id="profile-heading" class="v4-title">About</h2>}
+    </header>
+    <div class="profile-copy">
+      <p>I’m a BSc Computer Science student at the University of Pécs. I’m interested in embedded systems, robotics, and how software connects physical devices to cloud infrastructure and AI.</p>
+      {full && <p>From May to July 2026, I was a research intern at the University of Cagliari’s Trustworthy Artificial Intelligence Laboratory, working on retrieval augmented generation and retrieval evaluation.</p>}
+      <p>I share some of my collaborative engineering projects through the GitHub organization <a href="https://github.com/AppliedSystems-Lab">ASL — Applied Systems Lab</a>.</p>
+      <a class="v4-button" href={full ? '/research/' : '/about/'}>{full ? 'Research experience' : 'About me'} <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+  {full && <figure>
+    <Image src={portrait} alt="Portrait of Ali" width={650} widths={[320, 480, 650]} sizes="(max-width: 720px) 85vw, 35vw" />
+  </figure>}
+</section>
+
+<style>
+  .profile { padding-block: clamp(2rem, 4.5vw, 5rem); }
+  .profile-full { display: grid; grid-template-columns: minmax(0, 1.16fr) minmax(0, 1fr); gap: .65rem 3vw; align-items: center; }
+  .profile:not(.profile-full) { padding-block: clamp(1.5rem, 3.4vw, 3.5rem); }
+  .profile:not(.profile-full) .profile-text {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 7fr);
+    align-items: start;
+    gap: .85rem clamp(1rem, 2.1vw, 2rem);
+    padding: clamp(1rem, 2.1vw, 2rem) clamp(1.15rem, 2.75vw, 2.75rem);
+    border: 1px solid var(--color-rule);
+    border-block-start: 2px solid var(--color-accent);
+    background: var(--color-sheet);
+  }
+  h2 { margin: 0; }
+  .profile-copy p { max-width: 56ch; margin-bottom: 1rem; font-size: var(--v4-body); line-height: 1.6; }
+  .profile:not(.profile-full) .profile-copy p { max-width: 65ch; margin-block-end: .8rem; }
+  .profile-copy p a { color: var(--color-accent); }
+  .profile-copy p a:hover { text-decoration-thickness: 2px; }
+  figure { background: #403731; border-bottom: .45rem solid var(--color-accent); }
+  img { display: block; width: 100%; max-height: 27rem; object-fit: cover; object-position: center 54%; filter: saturate(.65); }
+  @media (max-width: 720px) {
+    .profile-full, .profile:not(.profile-full) .profile-text { grid-template-columns: minmax(0, 1fr); }
+    figure { max-width: 29rem; margin-block-start: 1rem; }
+  }
+</style>
