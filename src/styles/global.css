@@ -1,0 +1,155 @@
+@layer reset, tokens, base, layout, utilities;
+
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    text-size-adjust: 100%;
+  }
+
+  body,
+  h1,
+  h2,
+  h3,
+  p,
+  dl,
+  dd,
+  figure {
+    margin: 0;
+  }
+}
+
+@layer tokens {
+  :root {
+    color-scheme: light;
+    --color-canvas: #f3f1ea;
+    --color-ink: #171717;
+    --color-accent: #a94438;
+    --color-muted: #a8a19a;
+    --color-sheet: #ebe7dd;
+    --color-rule: color-mix(in srgb, var(--color-ink) 18%, transparent);
+    --color-grid: color-mix(in srgb, var(--color-muted) 24%, transparent);
+
+    --font-display: 'Space Grotesk', 'Arial Narrow', Arial, sans-serif;
+    --font-editorial: 'Instrument Serif', Georgia, serif;
+    --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+    --step--1: clamp(0.75rem, 0.71rem + 0.16vw, 0.875rem);
+    --step-0: clamp(1rem, 0.94rem + 0.24vw, 1.1875rem);
+    --step-1: clamp(1.25rem, 1.08rem + 0.68vw, 1.75rem);
+    --step-2: clamp(2rem, 1.46rem + 2.16vw, 3.625rem);
+    --step-3: clamp(3.5rem, 1.83rem + 6.67vw, 8.5rem);
+
+    --space-1: 0.5rem;
+    --space-2: 0.75rem;
+    --space-3: 1rem;
+    --space-4: 1.5rem;
+    --space-5: 2rem;
+    --space-6: 3rem;
+    --space-7: clamp(4rem, 9vw, 8rem);
+
+    --page-gutter: clamp(1rem, 4vw, 4rem);
+    --page-max: 100rem;
+    --measure: 62ch;
+    --line-thin: 1px;
+    --focus-ring: 3px solid var(--color-accent);
+    --motion-fast: 160ms;
+    --motion-standard: 260ms;
+  }
+}
+
+@layer base {
+  html {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    line-height: 1.5;
+    scrollbar-color: var(--color-accent) var(--color-canvas);
+    scrollbar-width: thin;
+  }
+
+  @supports not (scrollbar-color: auto) {
+    html::-webkit-scrollbar { width: 0.625rem; height: 0.625rem; }
+    html::-webkit-scrollbar-track { background: var(--color-canvas); }
+    html::-webkit-scrollbar-thumb { background: var(--color-accent); border-radius: 0.4rem; }
+    html::-webkit-scrollbar-thumb:hover { background: #88382e; }
+  }
+
+  @media (forced-colors: active) {
+    html { scrollbar-color: auto; scrollbar-width: auto; }
+  }
+
+  body {
+    min-height: 100vh;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  a {
+    color: inherit;
+    text-underline-offset: 0.2em;
+  }
+
+  :focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 0.25rem;
+  }
+
+  em {
+    color: var(--color-accent);
+    font-family: var(--font-editorial);
+    font-weight: 400;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-canvas);
+  }
+}
+
+@layer layout {
+  .shell {
+    width: min(calc(100% - 2 * var(--page-gutter)), var(--page-max));
+    margin-inline: auto;
+  }
+
+  .eyebrow {
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+}
+
+@layer utilities {
+  .skip-link {
+    position: fixed;
+    z-index: 10;
+    top: var(--space-3);
+    left: var(--space-3);
+    padding: var(--space-2) var(--space-3);
+    translate: 0 -200%;
+    background: var(--color-ink);
+    color: var(--color-canvas);
+  }
+
+  .skip-link:focus {
+    translate: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .skip-link {
+      transition: translate var(--motion-fast) ease;
+    }
+  }
+}

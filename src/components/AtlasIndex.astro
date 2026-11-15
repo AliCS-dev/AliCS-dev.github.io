@@ -1,0 +1,39 @@
+---
+interface Props {
+  index: string;
+  label: string;
+}
+
+const { index, label } = Astro.props;
+---
+
+<div class="index">
+  <span class="number" aria-hidden="true">{index}</span>
+  <span>{label}</span>
+  <span class="scale" aria-hidden="true"></span>
+</div>
+
+<style>
+  .index {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font: 500 0.75rem/1.35 var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.045em;
+  }
+  .number {
+    color: var(--color-accent);
+    border-inline-start: 2px solid currentColor;
+    padding-inline-start: 0.45rem;
+  }
+  .scale {
+    flex: 1;
+    min-width: 1rem;
+    max-width: 5.5rem;
+    height: 0.35rem;
+    --tick-ink: color-mix(in srgb, var(--color-accent) 46%, transparent);
+    border-block-end: 1px solid var(--tick-ink);
+    background: repeating-linear-gradient(90deg, var(--tick-ink) 0 1px, transparent 1px 0.55rem);
+  }
+</style>

@@ -1,0 +1,154 @@
+---
+import { Image } from 'astro:assets';
+import AtlasIndex from './AtlasIndex.astro';
+import MosaicArchitecture from './MosaicArchitecture.astro';
+import { workbenchArtifacts } from '../data/workbench';
+---
+
+<aside class="workbench" data-workbench aria-labelledby="workbench-title">
+  <header class="workbench-header">
+    <AtlasIndex index="01" label="Artifact explorer" />
+    <h2 id="workbench-title">Engineering Workbench</h2>
+  </header>
+  <nav aria-label="Choose a project artifact">
+    {workbenchArtifacts.map(({ id, tab }, index) => (
+      <a href={`#artifact-${id}`} data-artifact-select>
+        <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+        {tab}
+      </a>
+    ))}
+  </nav>
+
+  {workbenchArtifacts.map(({ id, title, domain, label, context, visual, source, repository }, index) => (
+    <section id={`artifact-${id}`} tabindex="-1" data-artifact-panel aria-labelledby={`artifact-title-${id}`}>
+      <div class="specimen-label">
+        <span class="index">A{String(index + 1).padStart(2, '0')}</span>
+        <span>{label}</span>
+        <span class="registration" aria-hidden="true">+</span>
+      </div>
+      <div class:list={['inspection', { diagram: visual.kind === 'mosaic' }]}>
+        {visual.kind === 'image' ? (
+          <Image
+            src={visual.src}
+            alt={visual.alt}
+            widths={[360, 600, Math.min(visual.src.width, 1040)]}
+            width={Math.min(visual.src.width, 1040)}
+            sizes="(max-width: 768px) 92vw, 53vw"
+            loading={index === 0 ? 'eager' : 'lazy'}
+            fetchpriority={index === 0 ? 'high' : 'auto'}
+          />
+        ) : <MosaicArchitecture />}
+      </div>
+      <div class="artifact-copy">
+        <p class="eyebrow">{domain}</p>
+        <h3 id={`artifact-title-${id}`}>{title}</h3>
+        <p>{context}</p>
+        {id === 'traffic-monitoring' && (
+          <p class="credit">
+            Aerial image by Sergio Ghisler, Javier Sanchez-Soriano and Sergio Bemposta Rosende
+            (<a href="https://zenodo.org/records/5776219">source data</a>,{' '}
+            <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>).
+            Resized with prediction and grid overlays.
+          </p>
+        )}
+        <ul class="artifact-links">
+          <li><a href={`#project-${id}`}>Project details <span aria-hidden="true">↓</span></a></li>
+          <li><a href={repository}>Repository <span aria-hidden="true">↗</span></a></li>
+          {source && <li><a href={source}>Original figure <span aria-hidden="true">↗</span></a></li>}
+        </ul>
+      </div>
+    </section>
+  ))}
+  <p class="status" role="status" data-workbench-status></p>
+</aside>
+
+<script>
+  import { initEngineeringWorkbench } from '../scripts/engineering-workbench';
+
+  document.querySelectorAll<HTMLElement>('[data-workbench]').forEach(initEngineeringWorkbench);
+</script>
+
+<style>
+  .workbench { min-width: 0; container-type: inline-size; border: 1px solid var(--color-rule); border-block-start: 2px solid var(--color-accent); }
+  .workbench-header { display: grid; gap: 0.3rem; padding: 0.7rem 0.9rem; }
+  h2 { font-size: clamp(1.25rem, 2vw, 1.65rem); line-height: 1.08; letter-spacing: -0.04em; }
+  nav {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.3rem;
+    padding: 0.35rem;
+    border-block-start: 1px solid var(--color-rule);
+    background: var(--color-sheet);
+  }
+  nav a {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 2.75rem;
+    padding: 0.3rem 0.5rem;
+    border-block-end: 2px solid transparent;
+    font: 500 0.75rem/1.35 var(--font-mono);
+    text-decoration: none;
+  }
+  nav a span { color: var(--color-accent); font-size: 0.6875rem; }
+  nav a:hover { text-decoration: underline; }
+  nav a[aria-current="true"] {
+    background: var(--color-canvas);
+    color: var(--color-accent);
+    border-block-end-color: currentColor;
+    font-weight: 700;
+  }
+  nav a:focus-visible { outline-offset: -2px; }
+  section { scroll-margin-block: 1rem; }
+  section:target .specimen-label { box-shadow: inset 3px 0 var(--color-accent); }
+  .specimen-label {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 0.65rem;
+    padding: 0.45rem 0.75rem;
+    background: var(--color-ink);
+    color: var(--color-canvas);
+    font: 0.7rem/1.35 var(--font-mono);
+  }
+  .index, .registration { color: #e8b3a9; }
+  .inspection {
+    display: grid;
+    grid-template: minmax(0, 1fr) / minmax(0, 1fr);
+    place-items: center;
+    aspect-ratio: 16 / 9;
+    background: #262522;
+    overflow: hidden;
+  }
+  .inspection img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+  .diagram {
+    grid-template-rows: auto;
+    aspect-ratio: auto;
+    min-height: max(14rem, 56.25cqw);
+    padding: 0.65rem;
+    background-color: var(--color-canvas);
+    background-image:
+      linear-gradient(var(--color-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-grid) 1px, transparent 1px);
+    background-size: 1.4rem 1.4rem;
+  }
+  .artifact-copy { padding: 0.65rem 0.85rem 0.4rem; border-inline-start: 2px solid var(--color-accent); }
+  h3 { margin-block: 0.2rem; font-size: clamp(1.1rem, 1.65vw, 1.45rem); line-height: 1.12; }
+  .artifact-copy p:not(.eyebrow) { font-size: 0.875rem; }
+  .artifact-copy p.credit { margin-block-start: 0.35rem; font: 0.6875rem/1.45 var(--font-mono); }
+  .artifact-links { display: flex; flex-wrap: wrap; gap: 0 1rem; list-style: none; margin: 0; padding: 0; }
+  .artifact-links a { display: inline-flex; align-items: center; gap: 0.25rem; min-height: 2.75rem; font-size: 0.8125rem; }
+  .artifact-links span { color: var(--color-accent); }
+  .status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  @media (prefers-reduced-motion: no-preference) {
+    .workbench[data-ready] section:not([hidden]) .inspection { animation: reveal 170ms ease-out; }
+    @keyframes reveal { from { opacity: 0.82; } to { opacity: 1; } }
+  }
+  @media (max-width: 64rem) and (min-width: 48.01rem), (max-width: 35rem) {
+    nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 35rem) {
+    .inspection:not(.diagram) { aspect-ratio: 4 / 3; }
+    .diagram { min-height: 75cqw; }
+  }
+</style>

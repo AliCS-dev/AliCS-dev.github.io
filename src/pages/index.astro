@@ -1,0 +1,54 @@
+---
+import PortfolioLayout from '../components/v4/PortfolioLayout.astro';
+import AtlasHero from '../components/v4/AtlasHero.astro';
+import HomepageProjects from '../components/v4/HomepageProjects.astro';
+import Profile from '../components/v4/Profile.astro';
+
+const practices = [
+  { icon: 'M4 17 12 6l8 11M8 17h8M12 6v13', name: 'Simulation & robotics', example: 'Urban flight and trajectory planning', href: '/projects/urban-uav/' },
+  { icon: 'M3 8V4h4m10 0h4v4m0 8v4h-4M7 20H3v-4M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z', name: 'Computer vision', example: 'Aerial detection inspection', href: '/projects/traffic-monitoring/' },
+  { icon: 'M4 6h16v12H4zM4 9h16m-12 4 2 2 3-3', name: 'Software systems', example: 'Browser workflows and backend APIs', href: '/projects/banking/' },
+  { icon: 'M5 18 11 8l8 8M8 18H5v-3M11 8V5m8 11v3', name: 'Applied AI', example: 'Retrieval and generation', href: '/projects/mosaic-rag/' },
+  { icon: 'M19 6c0 4-14 4-14 0s14-4 14 0ZM5 6v12c0 4 14 4 14 0V6M5 12c0 4 14 4 14 0', name: 'Data & backends', example: 'Relational account and transaction data', href: '/projects/banking/' },
+];
+---
+
+<PortfolioLayout title="The Engineer’s Atlas | Ali" description="Ali’s engineering portfolio across simulation, robotics, computer vision, full stack systems and applied AI.">
+  <AtlasHero />
+  <HomepageProjects />
+  <section class="practice" aria-labelledby="practice-heading">
+    <div class="shell practice-layout">
+      <div>
+        <p class="v4-kicker">Engineering practice</p>
+        <h2 id="practice-heading" class="v4-title">Disciplines<br />in practice</h2>
+      </div>
+      <ul>
+        {practices.map(({ icon, name, example, href }) => (
+          <li>
+            <a href={href}>
+              <svg viewBox="0 0 24 24" aria-hidden="true" width="24" height="24"><path d={icon} fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              <strong>{name}</strong>
+              <span>{example}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+  <Profile />
+</PortfolioLayout>
+
+<style>
+  .practice { background: #8f342b; color: var(--color-canvas); }
+  .practice .v4-kicker { color: #f3d8ce; }
+  .practice .v4-title { margin-block-end: 0; }
+  .practice-layout { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1rem 3vw; align-items: center; padding-block: clamp(1.4rem, 3vw, 2.8rem); }
+  ul { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); list-style: none; padding: 0; margin: 0; }
+  ul a { display: grid; gap: .45rem; align-content: start; height: 100%; padding: .55rem .75rem; border-inline-start: 1px solid #ddafa4; text-decoration: none; }
+  ul a:hover strong { text-decoration: underline; }
+  ul a:focus-visible { outline-color: var(--color-canvas); outline-offset: -2px; }
+  strong { font: 1.375rem/1.12 var(--font-editorial); }
+  ul span { font-size: .875rem; line-height: 1.4; }
+  @media (max-width: 940px) { .practice-layout { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 660px) { ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; } }
+</style>

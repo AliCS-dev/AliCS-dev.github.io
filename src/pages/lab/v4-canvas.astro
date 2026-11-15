@@ -1,0 +1,107 @@
+---
+import { getImage, Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import pecs from '../../assets/pecs-urban-scenario.png';
+import traffic from '../../assets/traffic-analysis.png';
+import { atlasProjects } from '../../data/atlas';
+
+const texture = await getImage({ src: traffic, width: 1024, format: 'webp' });
+---
+
+<BaseLayout title="V4 rendering study | Engineer’s Atlas" description="A local rendering study for the Cinematic Engineering Canvas." noindex>
+  <div class="study shell" data-v4-study data-texture={texture.src} data-mode="static">
+    <header class="masthead">
+      <a href="/" class="wordmark"><span aria-hidden="true">A<b>.</b></span> The Engineer’s Atlas</a>
+      <span>V4 · Rendering study</span>
+    </header>
+    <section class="composition" aria-labelledby="study-title">
+      <div class="editorial">
+        <p class="eyebrow">Cinematic engineering canvas</p>
+        <h1 id="study-title">The Engineer’s<br />Atlas</h1>
+        <p class="subhead">Multidisciplinary engineering<br />through real systems</p>
+        <p>Two projects in one architectural scene. Explore urban flight simulation and aerial image analysis.</p>
+        <div class="render-controls" hidden>
+          <button type="button" data-v4-render>Enable interactive 3D</button>
+        </div>
+      </div>
+      <div class="visual">
+        <div class="exhibit">
+          <figure id="v4-simulation">
+            <Image src={pecs} alt="MATLAB plot showing building geometry and the simulated flight path in the Pécs urban scenario" width={766} widths={[390, 600, 766]} sizes="(max-width: 760px) 92vw, 65vw" loading="eager" fetchpriority="high" />
+            <figcaption>01 / Pécs urban scenario · Original MATLAB output</figcaption>
+          </figure>
+          <figure id="v4-vision">
+            <Image src={traffic} alt="Traffic Monitoring application showing predicted boxes and its grid-cell inspector" width={1024} widths={[390, 640, 1024]} sizes="(max-width: 760px) 92vw, 65vw" />
+            <figcaption>02 / Traffic results · Original application capture</figcaption>
+          </figure>
+          <div class="scene" hidden data-v4-scene aria-hidden="true"></div>
+        </div>
+        <nav aria-label="Inspect an engineering project">
+          <a href="#v4-simulation" data-v4-focus="simulation"><span class="code" aria-hidden="true">01 /</span> Urban UAV Logistics Simulation</a>
+          <a href="#v4-vision" data-v4-focus="vision"><span class="code" aria-hidden="true">02 /</span> Traffic &amp; Crowd Monitoring</a>
+          <button type="button" data-v4-focus="overview" hidden>Overview</button>
+        </nav>
+      </div>
+    </section>
+    <div class="notes">
+      <div>
+        <p class="eyebrow">Project references</p>
+        <a href={atlasProjects['urban-uav'].repository}>UAV repository ↗</a>
+        <a href={atlasProjects['traffic-monitoring'].repository}>Traffic repository ↗</a>
+      </div>
+      <div class="provenance">
+        <p>The city, drone and camera path are conceptual illustrations. Traffic boxes are experimental detector predictions. Dense crowd counting is unsupported.</p>
+        <p>Aerial photo by Sergio Ghisler, Javier Sanchez-Soriano and Sergio Bemposta Rosende. Resized with prediction and grid overlays. <a href="https://zenodo.org/records/5776219">Source data</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+      </div>
+      <p role="status" data-v4-status></p>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  import { initCanvasStudy } from '../../scripts/v4-canvas';
+
+  document.querySelectorAll<HTMLElement>('[data-v4-study]').forEach(initCanvasStudy);
+</script>
+
+<style>
+  .study { --ink-warm: #27221d; }
+  .masthead, .wordmark, nav { display: flex; align-items: center; }
+  .masthead { justify-content: space-between; flex-wrap: wrap; gap: .35rem 1rem; padding-block: .75rem; border-bottom: 1px solid var(--color-rule); font: 500 .75rem/1.4 var(--font-mono); }
+  .wordmark { gap: .8rem; text-decoration: none; }
+  .wordmark span { font: 2.6rem/1 var(--font-editorial); }
+  .wordmark b { color: var(--color-accent); }
+  .composition { display: grid; grid-template-columns: minmax(0, 0.65fr) minmax(0, 1.7fr); gap: 1.55rem; align-items: center; padding-block: clamp(1.65rem, 4vw, 3.6rem) 1rem; }
+  .editorial { display: grid; gap: .7rem; align-content: center; }
+  h1 { font: 400 clamp(2.6rem, 4.75vw, 5rem)/.88 var(--font-editorial); letter-spacing: -.035em; }
+  .subhead { font: italic clamp(1.3rem, 2.2vw, 2.05rem)/1.03 var(--font-editorial); color: var(--ink-warm); }
+  .editorial > p:last-of-type { max-width: 30ch; font-size: .9375rem; }
+  .visual { min-width: 0; }
+  .exhibit { position: relative; display: grid; gap: .65rem; background: #dcd0bd; border-top: 3px solid var(--color-accent); }
+  figure { margin: 0; scroll-margin-block: 1rem; }
+  figure img { width: 100%; max-height: 31rem; aspect-ratio: 1.72; object-fit: contain; background: #282522; }
+  figcaption { color: var(--color-canvas); background: var(--ink-warm); padding: .48rem .75rem; font: .72rem/1.45 var(--font-mono); }
+  .scene { position: absolute; inset: 0; }
+  .study:is([data-mode="loading"], [data-mode="3d"]) .scene { display: block; }
+  .study[data-mode="loading"] .scene { visibility: hidden; }
+  .study[data-mode="3d"] .exhibit { aspect-ratio: 16 / 9; }
+  .study[data-mode="3d"] figure { display: none; }
+  nav { flex-wrap: wrap; align-items: stretch; border: 1px solid var(--color-rule); }
+  nav a, nav button { flex: 1 1 auto; -webkit-tap-highlight-color: transparent; }
+  nav a, button { min-height: 2.75rem; display: inline-flex; align-items: center; gap: .6rem; border: 0; padding: .55rem .75rem; font: 500 .78rem/1.3 var(--font-mono); }
+  button { color: var(--color-ink); background: var(--color-sheet); cursor: pointer; }
+  [hidden] { display: none !important; }
+  .render-controls button { background: var(--color-accent); color: var(--color-canvas); }
+  .code { color: var(--color-accent); flex: none; }
+  nav a[aria-current="true"], nav button[aria-pressed="true"] { background: var(--color-accent); color: var(--color-canvas); }
+  [aria-current="true"] .code { color: inherit; }
+  .notes { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: .8rem 2rem; padding-block: .8rem 1.5rem; border-top: 1px solid var(--color-rule); font-size: .85rem; }
+  .notes > div:first-child a { display: inline-block; margin: .35rem .8rem .25rem 0; }
+  .provenance p + p { margin-block-start: .35rem; }
+  @media (max-width: 760px) {
+    .composition, .notes { grid-template-columns: minmax(0, 1fr); }
+    h1 { font-size: clamp(2.85rem, 11vw, 4rem); }
+    nav { display: grid; }
+    figure img { aspect-ratio: auto; }
+  }
+</style>

@@ -1,0 +1,76 @@
+---
+import { Image } from 'astro:assets';
+import PortfolioLayout from '../../components/v4/PortfolioLayout.astro';
+import MosaicArchitecture from '../../components/MosaicArchitecture.astro';
+import MediaCredit from '../../components/v4/MediaCredit.astro';
+import { caseStudies, caseHref } from '../../data/cases';
+
+export function getStaticPaths() {
+  return caseStudies.map((project, index) => ({
+    params: { id: project.id },
+    props: { project, next: caseStudies[(index + 1) % caseStudies.length] },
+  }));
+}
+const { project, next } = Astro.props;
+---
+
+<PortfolioLayout title={`${project.title} | The Engineer’s Atlas`} description={project.summary}>
+  <article class="shell v4-page">
+    <a class="index-link" href="/projects/">← All projects</a>
+    <header class="case-heading">
+      <div>
+        <p class="v4-kicker">{project.number} / {project.domain}</p>
+        <h1 class="v4-title">{project.title}</h1>
+        <p class="lead">{project.summary}</p>
+      </div>
+      <div class="project-status">
+        <span class="v4-kicker">Evidence</span>
+        <p>{project.status}</p>
+        <a href={project.repository}>Project repository ↗</a>
+      </div>
+    </header>
+    <div class="case-grid">
+      <div class="v4-prose">
+        {project.sections.map(section => (
+          <section>
+            <h2>{section.title}</h2>
+            <p>{section.body}</p>
+            {section.steps && <ol class="sequence">
+              {section.steps.map((step, position) => <li><span aria-hidden="true">{String(position + 1).padStart(2, '0')}</span>{step}</li>)}
+            </ol>}
+          </section>
+        ))}
+      </div>
+      <aside aria-label="Project artifacts and sources">
+        {project.image && project.alt ? (
+          <figure class="evidence">
+            <Image src={project.image} alt={project.alt} width={Math.min(project.image.width, 1200)} sizes="(max-width: 800px) 92vw, 43vw"
+              widths={[400, 650, Math.min(project.image.width, 1200)]} />
+            <figcaption>{project.caption}</figcaption>
+            {project.id === 'traffic-monitoring' && <MediaCredit />}
+          </figure>
+        ) : <MosaicArchitecture />}
+        <h2 class="source-heading">Sources</h2>
+        <ul>{project.sources.map(source => <li><a href={source.href}>{source.label} ↗</a></li>)}</ul>
+      </aside>
+    </div>
+    <a class="v4-button" href={caseHref(next.id)}>Next project · {next.short} <span aria-hidden="true">→</span></a>
+  </article>
+</PortfolioLayout>
+
+<style>
+  .index-link { color: var(--color-accent); font: .78rem/1.4 var(--font-mono); }
+  .case-heading { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem 2rem; margin-block: 1.3rem 1.75rem; }
+  .case-heading .v4-title { max-width: 23ch; }
+  .project-status { border-left: 2px solid var(--color-accent); padding-left: .8rem; }
+  .project-status a { font-size: .86rem; }
+  .case-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 1.4rem clamp(1.6rem, 5vw, 5rem); margin-bottom: 1.25rem; }
+  .evidence { border-bottom: 1px solid var(--color-rule); }
+  .evidence img { width: 100%; }
+  figcaption { font: .75rem/1.5 var(--font-mono); padding-block: .4rem; }
+  .source-heading { margin-top: .9rem; font-size: 1rem; }
+  ul { padding-inline-start: 1.2rem; }
+  .sequence { display: flex; flex-wrap: wrap; gap: .4rem 1rem; margin-bottom: 0; padding: 0; list-style: none; font: .76rem/1.5 var(--font-mono); }
+  .sequence span { color: var(--color-accent); margin-inline-end: .4rem; }
+  @media (max-width: 800px) { .case-grid { grid-template-columns: minmax(0, 1fr); } }
+</style>
