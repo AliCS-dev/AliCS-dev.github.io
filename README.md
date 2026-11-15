@@ -1,6 +1,7 @@
-# Engineer's Atlas V4
+# Engineer's Atlas
+I did used AI for help :)
 
-Ali's engineering portfolio, built as a static Astro site with strict TypeScript
+Engineering portfolio, built as a static Astro site with strict TypeScript
 and native CSS. The homepage opens with an interactive Engineering Atlas that
 connects disciplines to projects and links to their case studies.
 
